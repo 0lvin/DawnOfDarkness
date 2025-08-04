@@ -1,0 +1,3177 @@
+// DOD Entity List for QER
+// 13:28 3/4/00
+
+/*QUAKED info_player_start (1 0 0) (-16 -16 -24) (16 16 32)
+model="players/male/tris.md2"
+The normal starting point for a level.
+*/
+
+/*QUAKED info_player_deathmatch (1 0 1) (-16 -16 -24) (16 16 32)
+model="players/male/tris.md2"
+potential spawning position for deathmatch games
+*/
+
+/*QUAKED info_player_intermission (1 0 1) (-16 -16 -24) (16 16 32)
+The deathmatch intermission point will be at one of these
+Use 'angles' instead of 'angle', so you can set pitch or roll as well as yaw.  'pitch yaw roll'
+*/
+
+/*QUAKED info_null (0 0.5 0) (-4 -4 -4) (4 4 4)
+Used as a positional target for spotlights, etc.
+*/
+
+/*QUAKED info_notnull (0 0.5 0) (-4 -4 -4) (4 4 4)
+Used as a positional target for lightning.
+*/
+
+
+/////////////////////////////////////////////////// END INFO_ SECTION
+
+
+/*QUAKED func_areaportal (0 .5 .8) ?
+This is a non-visible object that divides the world into
+areas that are seperated when this portal is not activated.
+Usually enclosed in the middle of a door.
+*/
+
+/*QUAKED func_button (0 .5 .8) ? TOUCH
+When a button is touched, it moves some distance in the direction of it's angle, triggers all of it's targets, waits some time, then returns to it's original position where it can be triggered again.
+
+TOUCH makes this button touch activated.
+
+"angle" determines the opening direction
+"target" all entities with a matching targetname will be used
+"speed" override the default 40 speed
+"wait" override the default 1 second wait (-1 = never return)
+"lip" override the default 4 pixel lip remaining at end of move
+"health" if set, the button must be killed instead of touched
+
+"sounds"
+0) silent
+1) misc/button1.wav
+2) misc/button2.wav (lighter of these two)
+*/
+
+/*QUAKED func_clock (0 0 1) (-8 -8 -8) (8 8 8) TIMER_UP TIMER_DOWN START_OFF MULTI_USE
+target a target_string with this
+
+The default is to be a time of day clock
+
+TIMER_UP and TIMER_DOWN run for "count" seconds and the fire "pathtarget"
+If START_OFF, this entity must be used before it starts
+
+"style"
+0) "xx"
+1) "xx:xx"
+2) "xx:xx:xx"
+*/
+
+/*QUAKED func_conveyor (0 .5 .8) ? START_ON TOGGLE
+Conveyors are stationary brushes that move what's on them.
+The brush should be have a surface with at least one current content enabled.
+speed	default 100
+*/
+
+/*QUAKED func_door (0 .5 .8) ? START_OPEN x CRUSHER NOMONSTER ANIMATED TOGGLE ANIMATED_FAST x x x x x x x x LOCKED
+TOGGLE		wait in both the start and end states for a trigger event.
+START_OPEN	the door to moves to its destination when spawned, and operate in reverse.  It is used to temporarily or permanently close off an area when triggered (not useful for touch or takedamage doors).
+NOMONSTER	monsters will not trigger this door
+LOCKED if you want locked door without items (key)you must set LOCKED flag 32768
+
+"message" is printed when the door is touched if it is a trigger door and it hasn't been fired yet
+"angle" determines the opening direction
+"targetname" if set, no touch field will be spawned and a remote button or trigger field activates the door.
+"health" if set, door must be shot open
+"speed" movement speed (100 default)
+"wait" wait before returning (3 default, -1 = never return)
+"lip" lip remaining at end of move (8 default)
+"dmg" damage to inflict when blocked (2 default)
+"item" if set, door will be locked and can be opened only with this key
+
+"inventory" Same as above, but better for other items than keys. ("inventory"/"item_w_flask,1")
+	SET SPAWNFLAGS 4096 (NO_COOP?)
+
+	All possible items:
+		item_w_flask
+		item_o_flask
+		item_b_flask
+		item_p_flask
+		item_root
+		item_p_bowl
+		item_time
+		item_space
+		item_energy
+		item_matter
+		item_vase1
+		item_bolts
+		item_piston
+
+	"message" Spawns at +activate for unfinished puzzle.
+	"message2" Spawns when puzzle is finished
+
+
+"sounds"
+0) silent
+1) door1_1.wav & door1_2.wav
+2) door2_1.wav & door2_2.wav
+3) door3_1.wav & door3_2.wav & door3_3.wav
+4) door4_1.wav & door4_2.wav & door4_3.wav
+5) door5_1.wav & door5_2.wav & door5_3.wav
+*/
+
+/*QUAKED func_door_rotating (0 .5 .8) ? START_OPEN REVERSE CRUSHER NOMONSTER ANIMATED TOGGLE X_AXIS Y_AXIS x x x x x x x LOCKED
+TOGGLE causes the door to wait in both the start and end states for a trigger event.
+START_OPEN	the door to moves to its destination when spawned, and operate in reverse.  It is used to temporarily or permanently close off an area when triggered (not useful for touch or takedamage doors).
+NOMONSTER	monsters will not trigger this door
+LOCKED if you want locked door without items (key)you must set LOCKED flag 32768
+
+You need to have an origin brush as part of this entity.  The center of that brush will be
+the point around which it is rotated. It will rotate around the Z axis by default.  You can
+check either the X_AXIS or Y_AXIS box to change that.
+
+"distance" is how many degrees the door will be rotated.
+"speed" determines how fast the door moves; default value is 100.
+
+REVERSE will cause the door to rotate in the opposite direction.
+
+"message" is printed when the door is touched if it is a trigger door and it hasn't been fired yet
+"angle" determines the opening direction
+"targetname" if set, no touch field will be spawned and a remote button or trigger field activates the door.
+"health" if set, door must be shot open
+"speed" movement speed (100 default)
+"wait" wait before returning (3 default, -1 = never return)
+"dmg" damage to inflict when blocked (2 default)
+"item" if set, door will be locked and can be opne only with this key
+
+"inventory" Same as above, but better for other items than keys. ("inventory"/"item_w_flask,1")
+	SET SPAWNFLAGS 4096 (NO_COOP?)
+
+	All possible items:
+		item_w_flask
+		item_o_flask
+		item_b_flask
+		item_p_flask
+		item_root
+		item_p_bowl
+		item_time
+		item_space
+		item_energy
+		item_matter
+		item_vase1
+		item_bolts
+		item_piston
+
+	"message" Spawns at +activate for unfinished puzzle.
+	"message2" Spawns when puzzle is finished.
+
+"sounds"
+0) silent
+1) door1_1.wav & door1_2.wav
+2) door2_1.wav & door2_2.wav
+3) door3_1.wav & door3_2.wav & door3_3.wav
+4) door4_1.wav & door4_2.wav & door4_3.wav
+5) door5_1.wav & door5_2.wav & door5_3.wav
+*/
+
+/*QUAKED func_door_secret (0 .5 .8) ? always_shoot 1st_left 1st_down
+A secret door.  Slide back and then to the side.
+
+open_once		doors never closes
+1st_left		1st move is left of arrow
+1st_down		1st move is down from arrow
+always_shoot	door is shootebale even if targeted
+
+"angle" determines the direction
+"dmg" damage to inflic when blocked (default 2)
+"wait" how long to hold in the open position (default 5, -1 means hold)
+"main" index of quest , when player open door flag is set in GSM
+"minor" status in quest, when player open door flag is set in GSM
+"gsm"		
+0) GSM(main/minor) is set when player open door
+1) GSM(main/minor) is set when player trying open locked door
+"sounds"
+0) silent
+1) door1_1.wav & door1_2.wav
+2) door2_1.wav & door2_2.wav
+3) door3_1.wav & door3_2.wav & door3_3.wav
+4) door4_1.wav & door4_2.wav & door4_3.wav
+5) door5_1.wav & door5_2.wav & door5_3.wav
+*/
+
+/*QUAKED func_explosive (0 .5 .8) ? Trigger/GSM_Spawn ANIMATED ANIMATED_FAST
+Any brush that you want to explode or break apart.  If you want an
+explosion, set dmg and it will do a radius explosion of that amount
+at the center of the bursh.
+*/
+
+/*QUAKED func_dig (0 .5 .8) ? break_shovel
+Brush entity that can be dug by using a shovel on it.
+
+inventory: items in inventory will be added to players inventory
+target_gsm: use only target_gsm with GSM_USE_SET spawnflag
+message: Message that gets displayed when func_dig is dug
+
+Things that doesn't have models: (Can be in any inventory, monster's or NPC's as well)
+"item_torch" - Torch, may have model later(?) so it's defined as entity in this file too
+"item_root" - Amaranth root
+"item_p_bowl" - Purified water
+"item_time" - Cipher Piece 1
+"item_space" - Cipher Piece 2
+"item_energy" - Cipher Piece 3
+"item_matter" - Cipher Piece 4
+"ammo_cballs" - Cannon Balls
+*/
+
+/*QUAKED func_group (0 0 0) ?
+Used to group brushes together just for editor convenience.
+*/
+
+/*QUAKED func_killbox (1 0 0) ?
+Kills everything inside when fired, irrespective of protection.
+*/
+
+/*QUAKED func_object (0 .5 .8) ? TRIGGER/GSM_SPAWN ANIMATED ANIMATED_FAST
+This is solid bmodel that will fall if it's support it removed.
+
+If "targetname" is applied, it will fall when it's triggered.
+If "attenuation" is set, it will fall only so many units as set.
+*/
+
+/*QUAKED func_plat (0 .5 .8) ? PLAT_LOW_TRIGGER FIRE_TARGET_ONCE ONLY_UP/DOWN RETURN_ASAP
+Plats are always drawn in the extended position, so they will light correctly.
+
+FIRE_TARGET_ONCE = fire target one one time, if not set fire always when hit top or bottom
+ONLY_UP/DOWN = dont return to spawn position
+RETURN_ASAP = return to starting positon after 0.3s instead 3 seconds
+
+If the plat is the target of another trigger or button, it will start out disabled in the extended position until it is trigger, when it will lower and become a normal plat.
+
+"speed" overrides default 200.
+"accel" overrides default 500
+"lip" overrides default 8 pixel lip
+
+If the "height" key is set, that will determine the amount the plat moves, instead of being implicitly determoveinfoned by the model's height.
+
+"sounds"
+0) silent
+1) plats/wood.wav
+2) plats/metal.wav
+*/
+
+/*QUAKED func_rotating (0 .5 .8) ? START_ON REVERSE X_AXIS Y_AXIS TOUCH_PAIN STOP ANIMATED ANIMATED_FAST
+You need to have an origin brush as part of this entity.  The center of that brush will be
+the point around which it is rotated. It will rotate around the Z axis by default.  You can
+check either the X_AXIS or Y_AXIS box to change that.
+
+"speed" determines how fast it moves; default value is 100.
+"dmg"	damage to inflict when blocked (2 default)
+
+REVERSE will cause the it to rotate in the opposite direction.
+STOP mean it will stop moving instead of pushing entities
+*/
+
+/*QUAKED func_train (0 .5 .8) ? START_ON TOGGLE BLOCK_STOPS
+Trains are moving platforms that players can ride.
+The targets origin specifies the min point of the train at each corner.
+The train spawns at the first target it is pointing at.
+If the train is the target of a button or trigger, it will not begin moving until activated.
+"speed" default 100
+"dmg" default 2
+noise	looping sound to play when the train is in motion
+*/
+
+/*QUAKED func_timer (0.3 0.1 0.6) (-8 -8 -8) (8 8 8) START_ON
+"wait" base time between triggering all targets, default is 1
+"random" wait variance, default is 0
+
+so, the basic time between firing is a random time between
+(wait - random) and (wait + random)
+
+"delay" delay before first firing when turned on, default is 0
+"pausetime" additional delay used only the very first time and only if spawned with START_ON
+
+These can used but not touched.
+*/
+
+/*QUAKED func_wall (0 .5 .8) ? TRIGGER/GSM_SPAWN TOGGLE START_ON ANIMATED ANIMATED_FAST
+This is just a solid wall if not inhibited
+
+TRIGGER_SPAWN the wall will not be present until triggered it will then blink in to existance; it will kill anything that was in it's way.
+TOGGLE only valid for TRIGGER_SPAWN walls this allows the wall to be turned on and off.
+START_ON only valid for TRIGGER_SPAWN walls the wall will initially be present.
+*/
+
+/*QUAKED func_water (0 .5 .8) ? START_OPEN PURIFIED
+func_water is a moveable water brush.  It must be targeted to operate.  Use a non-water texture at your own risk.
+
+START_OPEN causes the water to move to its destination when spawned and operate in reverse.
+PURIFIED turns it into a purified water, thus you can "use" bowl on it.
+	You can flip GSM flag when player uses the bowl. (target_GSM with "GSM_USE_SET" spawnflag)
+
+"angle" determines the opening direction (up or down only)
+"speed" movement speed (25 default)
+"wait" wait before returning (-1 default, -1 = TOGGLE)
+"lip" lip remaining at end of move (0 default)
+"sounds" (yes, these need to be changed)
+0) no sound
+1) water
+2) lava
+*/
+
+
+/////////////////////////////////////////////////// END FUNC_ SECTION
+
+
+/*QUAKED target_blaster (1 0 0) (-8 -8 -8) (8 8 8) NOTRAIL NOEFFECTS
+Fires a blaster bolt in the set direction when triggered.
+
+"dmg" default is 15
+"speed" default is 1000
+*/
+
+/*QUAKED target_character (0 0 1) ?
+used with target_string (must be on same "team")
+"count" is position in the string (starts at 1)
+*/
+
+/*QUAKED target_changelevel (1 0 0) (-8 -8 -8) (8 8 8)
+Changes level to "map" when fired
+*/
+
+/*QUAKED target_crosslevel_trigger (.5 .5 .5) (-8 -8 -8) (8 8 8) trigger1 trigger2 trigger3 trigger4 trigger5 trigger6 trigger7 trigger8
+Once this trigger is touched/used, any trigger_crosslevel_target with the same trigger number is automatically used when a level is started within the same unit.  It is OK to check multiple triggers.  Message, delay, target, and killtarget also work.
+*/
+
+/*QUAKED target_crosslevel_target (.5 .5 .5) (-8 -8 -8) (8 8 8) trigger1 trigger2 trigger3 trigger4 trigger5 trigger6 trigger7 trigger8
+Triggered by a trigger_crosslevel elsewhere within a unit.  If multiple triggers are checked, all must be true.  Delay, target and killtarget also work.
+
+"delay" delay before using targets if the trigger has been activated (default 1)
+*/
+
+/*QUAKED target_debris (0 .5 .8) (-8 -8 -8) (8 8 8) TRIGGERING ONCE START_ON ONLY_SMALL ONLY_BIG
+TRIGGERING : spawn debris only when fired, if not set code spawn debris each
+frame or by wait field
+ONCE : free entity after fired
+START_ON : spawning debris after loaded map (+2 second)
+ONLY_SMALL : spawn only small debris
+ONLY_BIG : spawn only big debries
+
+
+mass defaults to 75.  This determines how much debris is emitted when
+it explodes.  You get one large chunk per 100 of mass (up to 8) and
+one small chunk per 25 of mass (up to 16).  So 800 gives the most.
+
+wait : useful without TRIGGERED spawnflag, target will wait untill spawn
+next debries
+speed : speed for debries (default 150)
+target : you must use info_null for aim ! Need know where debries must fall
+or fly
+dmg : if set, debris damage player or monsters
+*/
+
+/*QUAKED target_earthquake (1 0 0) (-8 -8 -8) (8 8 8)
+When triggered, this initiates a level-wide earthquake.
+All players and monsters are affected.
+"speed" severity of the quake (default:200)
+"count" duration of the quake (default:5)
+*/
+
+/*QUAKED target_explosion (1 0 0) (-8 -8 -8) (8 8 8)
+Spawns an explosion temporary entity when used.
+
+"delay" wait this long before going off
+"dmg" how much radius damage should be done, defaults to 0
+*/
+
+/*QUAKED target_goal (1 0 1) (-8 -8 -8) (8 8 8)
+Counts a goal completed.
+*/
+
+/*QUAKED target_help (1 0 1) (-16 -16 -24) (16 16 24) help1
+When fired, the "message" key becomes the current personal computer string, and the message light will be set on all clients status bars.
+*/
+
+/*QUAKED target_interaction (1 0 0) (-8 -8 -8) (8 8 8) X INFO_ICON
+Spawns a conversation session with nobody when used.
+
+INFO_ICON: If set, displays an icon that "invites" player to press activate if he wishes to check the interaction.
+Use with trigger_multiple (with spawnflag "once_per_touch" set)
+If you use with trigger_once, the info icon will remain visible for 8 seconds after triggering.
+
+"name" Conversation window title. Defaults to "" (none)
+"datafile" Text filename.
+"camtype"    Type of camera. 0=none (default), 2=static,
+             3=conversation
+"target"     If static cam is used, this is the cam_aim entity's
+             targetname value. Default is none which means
+             the camera aims at the player.
+	     If static cam is NOT used, can trigger stuff.
+
+You can also use "killtarget", "target_gsm" (with GSM_USE_SET) & "delay"
+
+If static camera is used:
+-the location of this target_interaction entity is the camera 
+location.
+-the camera is turned off when the player exits the conversation.
+*/
+
+/*QUAKED target_laser (0 .5 .8) (-8 -8 -8) (8 8 8) START_ON RED GREEN BLUE YELLOW ORANGE FAT
+When triggered, fires a laser.  You can either set a target or a direction.
+*/
+
+/*QUAKED target_lightramp (0 .5 .8) (-8 -8 -8) (8 8 8) TOGGLE
+"speed" How many seconds the ramping will take
+"message" two letters; starting lightlevel and ending lightlevel
+*/
+
+/*QUAKED target_secret (1 0 1) (-8 -8 -8) (8 8 8)
+Counts a secret found.
+*/
+
+/*QUAKED target_speaker (1 0 0) (-8 -8 -8) (8 8 8) looped-on looped-off reliable
+"noise" wav file to play
+"volume" 0.0 to 1.0
+"attenuation"
+-1) none, send to whole level
+1) normal fighting sounds
+2) idle sound level
+3) ambient sound level
+
+Normal sounds play each time the target is used.  The reliable flag can be set for crucial voiceovers.
+
+Looped sounds are allways atten 3 / vol 1, and the use function toggles it on/off.
+Multiple identical looping sounds will just increase volume without any speed cost.
+*/
+
+/*QUAKED target_string (0 0 1) (-8 -8 -8) (8 8 8)
+*/
+
+/*QUAKED target_spawner (1 0 0) (-8 -8 -8) (8 8 8) X X X X X X X X
+Set target to the type of entity you want spawned.  Useful for spawning monsters and gibs in the factory levels.
+
+For monsters: Set direction to the facing you want it to have.
+For gibs: Set direction if you want it moving and speed how fast it should be moving otherwise it will just be dropped
+
+"delay" - Minimum time betweens spawns, won't "forget" any triggerings. Used to prevent stuff spawning within each others.
+
+You can copy these to the spawned entity:
+moodname
+moodtime
+lastmoodname
+lastmoodtime
+alert_mood
+alert_time
+alert_target
+fleetarget
+sight_range
+attack_msg
+aggression
+paranoia
+morale
+skinnum
+deathtarget
+inventory
+spawnflags
+team
+health
+armor
+To copy "TARGET" use "pathtarget"
+To copy "TARGETNAME" use "name"
+
+
+*/
+
+/*QUAKED target_splash (1 0 0) (-8 -8 -8) (8 8 8)
+Creates a particle splash effect when used.
+
+"count" how many pixels in the splash
+"dmg" if set, does a radius damage at this location when it splashes useful for lava/sparks
+"sounds" set to one of the following:
+1) sparks
+2) blue water
+3) brown water
+4) slime
+5) lava
+6) blood
+*/
+
+/*QUAKED target_temp_entity (1 0 0) (-8 -8 -8) (8 8 8) 
+Fire an origin based temp entity event to the clients.
+"style" type byte
+*/
+
+
+/*QUAKED target_gsm (1 0 0) (-8 -8 -8) (8 8 8) GSM_SPAWN GSM_FREE GSM_KILL GSM_LOCK GSM_UNLOCK GSM_USE GSM_USE_SET GSM_LOCK_SET GSM_FREE_SET GSM_RELEASE GSM_MULTIPLE 
+
+"main" index of quest , when player open door flag is set in GSM
+"minor" status in quest, when player open door flag is set in GSM
+	There's 300 "mains", each having 32 "minors"
+
+"targetname" this target_gsm
+"target" next target_gsm
+GSM_SPAWN       1
+GSM_FREE        2
+GSM_KILL        4
+GSM_LOCK        8
+GSM_UNLOCK      16
+GSM_USE         32 (changing mood too)
+GSM_USE_SET     64
+GSM_LOCK_SET    128
+
+GSM_FREE_SET    8192
+GSM_RELEASE     16384
+GSM_MULTIPLE	32768
+
+If you DON'T set GSM_MULTIPLE, target_GSM works only once, and/or fires only one target(?)
+"USE" = "Trigger"
+"use_set" means it sets GSM flag when triggered.
+
+You can use mood stuff to change mood aspects of the entities being "used" (triggered) by target_GSM
+"moodname" sets the AI behavior
+-wandering (default)
+-guarding  (Set guard radius with "guard_distance")
+-fleeing
+-standing
+-waiting
+-dormant
+-patrolling
+-mission
+-critical mission
+-running
+-dead
+Refer "moods.doc" for behaviour.
+
+"moodtime" - How long the mood lasts
+"lastmoodname" - Theoretically the mood they were in "previously"
+"lastmoodtime" - How much time was supposedly left on their previous mood (0 for forever)
+"alert_mood" - In which mood monster goes when it gets alerted (won't have immediate effect on already alerted monsters)
+"alert_time" - How many seconds they stay in alert_mood, after that they go to the previous mood (or "lastmoodname")
+
+"combattarget"
+"sight_range"
+"fleetarget"
+"alert_target"
+"datafile"
+
+You can also remove some keys when applying "^" as a value. These keys are:
+combattarget
+fleetarget
+datafile
+alert_target
+deathtarget
+*/
+
+/////////////////////////////////////////////////// END TARGET_ SECTION
+
+/*QUAKED trap_arrow (0 .5 .8) ? FL_ARROW BOLT EXPL_BOLT
+Spawns Arrows for use in a trap.  Shoots normal arrows by default.
+
+FL_ARROW shoots flaming arrows.
+BOLT shoots bolts.
+EXPL_BOLT forces an explosion when arrow trap is destroyed.
+
+"target" must be targeted to a path_corner.  This is where the arrow will
+originate from.  That path_corner must be targeted to another path_corner
+which designates the trajectory of the arrow.
+
+"health" set to be able to kill arrow trap.
+*/
+
+/////////////////////////////////////////////////// END TRAP_ SECTION
+
+/*QUAKED trigger_always (.5 .5 .5) (-8 -8 -8) (8 8 8)
+This trigger will always fire.  It is activated by the world.
+*/
+
+/*QUAKED trigger_counter (.5 .5 .5) ? nomessage x x x ENABLE_ALERT
+Acts as an intermediary for an action that takes multiple inputs.
+
+If nomessage is not set, it will print "1 more.. " etc when triggered and "sequence complete" when finished.
+
+ENABLE_ALERT: If set, monsters will come aware of player upon triggering a mood on them. If not triggering a mood, it's always set.
+When triggering "critical mission" on monster without "enable_alert", monster will run to it's "target" rather than "combattarget". It will still get to it's "combattarget" when it actually comes alerted. (sees player)
+
+After the counter has been triggered "count" times (default 2), it will fire all of it's targets and remove itself.
+*/
+
+/*QUAKED trigger_elevator (0.3 0.1 0.6) (-8 -8 -8) (8 8 8)
+*/
+
+/*QUAKED trigger_gravity (.5 .5 .5) ?
+Changes the touching entites gravity to the value of "gravity".
+1.0 is standard gravity for the level.
+*/
+
+/*QUAKED trigger_hurt (.5 .5 .5) ? START_OFF TOGGLE SILENT NO_PROTECTION SLOW
+Any entity that touches this will be hurt.  It does dmg points of damage each server frame.
+
+SILENT supresses playing the sound
+SLOW changes the damage rate to once per second
+NO_PROTECTION *nothing* stops the damage
+
+"dmg" default 5 (whole numbers only)
+*/
+
+/*QUAKED trigger_key (.5 .5 .5) (-8 -8 -8) (8 8 8)
+A relay trigger that only fires it's targets if player has the proper key.
+Use "item" to specify the required key, for example "key_data_cd"
+*/
+
+/*QUAKED trigger_multiple (.5 .5 .5) ? MONSTER NOT_PLAYER TRIGGERED ONCE_PER_TOUCH ENABLE_ALERT
+
+ONCE_PER_TOUCH : useful for target_interaction, trigger fire target only one
+time when entity touch trigger
+Be carefull, because code checking only lastest entity. So if another player
+or monster touch trigger, trigger fire target again for all entities inside
+trigger. Better dont add MONSTER spawnflag
+
+ENABLE_ALERT: If set, monsters will come aware of player upon triggering a mood on them. If not triggering a mood, it's always set.
+When triggering "critical mission" on monster without "enable_alert", monster will run to it's "target" rather than "combattarget". It will still get to it's "combattarget" when it actually comes alerted. (sees player)
+
+Variable sized repeatable trigger.
+If not targeted to anything, works as "area mood" (All the touching NPC's, animals and monsters adopt settings from the trigger)
+
+If "delay" is set, the trigger waits some time after activating before
+firing.
+"wait" Seconds between triggerings. (.2 default)
+"message" text string
+"sounds"
+1) secret
+2) beep beep
+3) large switch
+4)
+
+If entity that has moods is targeted, you can use:
+
+"moodname"
+-wandering (default)
+-guarding  (Set guard radius with "guard_distance")
+-fleeing
+-standing
+-waiting
+-dormant
+-patrolling
+-mission
+-critical mission
+-running
+-dead
+Refer "moods.doc" for behaviour.
+
+"moodtime" sets the how long (in secs) the mood will last.
+"lastmoodname" - Theoretically the mood the touching entity were in "previously"
+"lastmoodtime" - How much time was supposedly left on touching entity's previous mood (0 for forever)
+
+"alert_mood" - In which mood touching entity goes when it gets alerted. (Doesn't have any effect if entity is already alerted)
+"alert_time" - How many seconds touching entity stays in alert_mood, after that it goes to the previous mood (or "lastmoodname")
+
+"combattarget"
+"sight_range"
+"fleetarget"
+"alert_target"
+"datafile"
+
+You can also remove some keys when applying "^" as a value. These keys are:
+combattarget
+fleetarget
+datafile
+alert_target
+deathtarget
+*/
+
+/*QUAKED trigger_once (.5 .5 .5) ? x x TRIGGERED x ENABLE_ALERT
+Triggers once, then removes itself.
+You must set the key "target" to the name of another object in the level that has a matching "targetname".
+
+If TRIGGERED, this trigger must be triggered before it is live.
+
+ENABLE_ALERT: If set, monsters will come aware of player upon triggering a mood on them. If not triggering a mood, it's always set.
+When triggering "critical mission" on monster without "enable_alert", monster will run to it's "target" rather than "combattarget". It will still get to it's "combattarget" when it actually comes alerted. (sees player)
+
+"message" string to be displayed when triggered
+"sounds"
+1) secret
+2) beep beep
+3) large switch
+4)
+
+If entity that has moods is targeted, you can use:
+
+"moodname"
+-wandering (default)
+-guarding  (Set guard radius with "guard_distance")
+-fleeing
+-standing
+-waiting
+-dormant
+-patrolling
+-mission
+-critical mission
+-running
+-dead
+Refer "moods.doc" for behaviour.
+
+"moodtime" sets the how long (in secs) the mood will last.
+"lastmoodname" - Theoretically the mood the touching entity were in "previously"
+"lastmoodtime" - How much time was supposedly left on touching entity's previous mood (0 for forever)
+
+"alert_mood" - In which mood touching entity goes when it gets alerted. (Doesn't have any effect if entity is already alerted)
+"alert_time" - How many seconds touching entity stays in alert_mood, after that it goes to the previous mood (or "lastmoodname")
+
+"combattarget"
+"sight_range"
+"fleetarget"
+"alert_target"
+"datafile"
+
+You can also remove some keys when applying "^" as a value. These keys are:
+combattarget
+fleetarget
+datafile
+alert_target
+deathtarget
+*/
+
+/*QUAKED trigger_push (.5 .5 .5) ? PUSH_ONCE
+Pushes the player
+"speed" defaults to 1000
+*/
+
+/*QUAKED trigger_relay (.5 .5 .5) (-8 -8 -8) (8 8 8) x x x x ENABLE_ALERT
+This fixed size trigger cannot be touched, it can only be fired by other events.
+
+ENABLE_ALERT: If set, monsters will come aware of player upon triggering a mood on them. If not triggering a mood, it's always set.
+When triggering "critical mission" on monster without "enable_alert", monster will run to it's "target" rather than "combattarget". It will still get to it's "combattarget" when it actually comes alerted. (sees player)
+
+"delay" set delay before relaying the trigger forward. (to "target")
+
+If entity that has moods is targeted, you can use:
+
+"moodname"
+-wandering (default)
+-guarding  (Set guard radius with "guard_distance")
+-fleeing
+-standing
+-waiting
+-dormant
+-patrolling
+-mission
+-critical mission
+-running
+-dead
+Refer "moods.doc" for behaviour.
+
+"moodtime" sets the how long (in secs) the mood will last.
+"lastmoodname" - Theoretically the mood the touching entity were in "previously"
+"lastmoodtime" - How much time was supposedly left on touching entity's previous mood (0 for forever)
+
+"alert_mood" - In which mood touching entity goes when it gets alerted. (Doesn't have any effect if entity is already alerted)
+"alert_time" - How many seconds touching entity stays in alert_mood, after that it goes to the previous mood (or "lastmoodname")
+
+"combattarget"
+"sight_range"
+"fleetarget"
+"alert_target"
+"datafile"
+
+You can also remove some keys when applying "^" as a value. These keys are:
+combattarget
+fleetarget
+datafile
+alert_target
+deathtarget
+*/
+
+/*QUAKED trigger_monsterjump (.5 .5 .5) ?
+Walking monsters that touch this will jump in the direction of the trigger's angle
+"speed" default to 200, the speed thrown forward
+"height" default to 200, the speed thrown upwards
+*/
+
+/*QUAKED trigger_GSM (.5 .5 .5) ?
+"main" index of quest
+"minor" status in quest
+*/
+
+
+/////////////////////////////////////////////////// END TRIGGER_ SECTION
+
+// LIGHTS ARE YELLOW 
+
+/*QUAKED light (1 1 0) (-8 -8 -8) (8 8 8) START_OFF
+Non-displayed light.
+"light" sets light level. Default is 300. (Can be negative to cast darkness)
+"_color" "0.0 0.0 0.0" RGB value must be in decimal.  Hit "K" to bring up color chart.
+"style" sets light style. Default is 0.
+"_cone" sets diameter of spotlight. Default is 10.
+If targeted, will toggle between on and off.
+
+Style Types:
+1) flicker (first variety)
+2) slow strong pulse
+3) candle (first variety)
+4) fast strobe
+5) gentle pulse
+6) flicker (second variety)
+7) candle (second variety)
+8) candle (third variety)
+9) slow strobe (fourth variety)
+10)fluorescent flicker
+11)slow pulse not fade to black
+
+12-31 open for modification
+32-62 reserved by QRAD3 for switchable light styles, and 63 is reserved for testing
+
+"_mangle" "# #" - aim spots by yaw(0-360) & pitch(-90-90)
+"_spotangle" "# #" - same as "_mangle"
+"_spotvector" "# # #" - aim spotlights by direction vector
+"_spotpoint" "# # #" - aim spotlights at global coordinate point
+"_focus" "#" - cone attenuation for spotlights
+"_falloff" "#" - 0=linear, 1=inverse, 2=inverse square
+"_wait" "#" - light distance attenuation
+"_fade" "#" - same as "_wait"
+"_angwait" "#" - light angle attenuation
+"_angfade" "#" - same as "_angwait"
+*/
+
+/*QUAKED light_mine1 (1 1 0) (-2 -2 -12) (2 2 12)
+*/
+
+/*QUAKED light_mine2 (1 1 0) (-2 -2 -12) (2 2 12)
+*/
+
+
+/////////////////////////////////////////////////// END LIGHT_ SECTION
+
+
+// MISC ARE GREY
+
+/*QUAKED misc_teleporter (.8 .8 .8) (-32 -32 -24) (32 32 -16)
+Stepping onto this disc will teleport players to the targeted misc_teleporter_dest object.
+*/
+
+/*QUAKED misc_teleporter_dest (8 .8 .8) (-32 -32 -24) (32 32 -16)
+Point teleporters at these.
+*/
+
+/*QUAKED misc_banner (8 .8 .8) (-4 -4 -4) (4 4 4)
+model="models/objects/banner/tris.md2"
+The origin is the bottom of the banner.
+The banner is 128 tall.
+*/
+
+/////////////////////////////////////////////////// END MISC_ SECTION
+
+
+// WILL CHANGED TO CANNON SECTION
+
+/*QUAKED turret_base (0 .5 .8) ?
+This portion of the turret changes yaw only.
+MUST be teamed with a turret_breach.
+*/
+
+/*QUAKED turret_breach (0 .5 .8) ?
+This portion of the turret can change both pitch and yaw.
+The model  should be made with a flat pitch.
+It (and the associated base) need to be oriented towards 0.
+
+"angle" sets the starting angle.
+"speed" default 50
+"dmg" default 10
+"angle" point this forward
+"target" point this at an info_notnull at the muzzle tip
+"minpitch" min acceptable pitch angle : default -30
+"maxpitch" max acceptable pitch angle : default 30
+"minyaw" min acceptable yaw angle   : default 0
+"maxyaw" max acceptable yaw angle   : default 360
+*/
+
+/*QUAKED turret_driver (1 .5 0) (-16 -16 -24) (16 16 32)
+Must NOT be on the team with the rest of the turret parts.
+Instead it must target the turret_breach.
+Crescent model, use "skinnum"/"1"
+USE "COUNT" (Number of cannonballs)
+*/
+
+
+/////////////////////////////////////////////////// END TURRET_ SECTION
+
+
+// KEYS ARE BROWN
+
+/*QUAKED keys_xxx (.5 .3 0) (-16 -16 -16) (16 16 16)
+*/
+
+
+/////////////////////////////////////////////////// END KEY_ SECTION
+
+
+//MONSTER ARE RED
+
+/*QUAKED monster_apprentice (1 0 0) (-16 -16 -24) (16 16 32) Ambush Trigger/GSM_Spawn Sight Team_Leader Init_Talk Fearless Attack
+model="models/monsters/necro.md2"
+
+TRIGGER_SPAWN info: If entity is spawned by triggering, and DOESN'T have
+moodname set, it will behave as if
+it was in the level already, and was triggered. (Attack player or take
+"moodname" info from trigger)
+Team_Leader sets one monster entity to lead the "team".
+ATTACK makes trigger_spawn monsters attack immediately when spawned
+
+"team" all monster entities with matching team name will be used, one
+monster entity in each team must be Team_Leader
+"inventory" object's inventory
+example: "weapon_sword,1,item_book1,1"
+
+"moodname" sets the AI behavior
+-wandering (default)
+-guarding  (Set guard radius with "guard_distance")
+-fleeing
+-standing
+-waiting
+-dormant
+-patrolling
+-mission
+-critical mission
+-running
+-dead
+Refer "moods.doc" for behaviour.
+
+"moodtime" sets the how long (in secs) the mood will last from start of the
+level.
+0)lasts forever
+When the mood wears off they will go into "lastmoodname"
+
+"lastmoodname" - Theoretically the mood they were in "previously"
+"lastmoodtime" - How much time was supposedly left on their previous mood (0
+for forever)
+
+"alert_mood" - In which mood monster goes when it gets alerted
+"alert_time" - How many seconds they stay in alert_mood, after that they go
+to the previous mood (or "lastmoodname")
+
+"attack_msg" Message to diplay as a chat in place of the traditional "hey!"
+alert sound
+
+"aggression" Modify the AI
+"paranoia" Modify the AI
+"morale" Modify the AI
+
+"sight_range" Number of "units" the entity can see.
+
+"health" & "armor", set by numbers, armor values: (12 being the strongest)
+Skin(1), Fur(2), Cloth(3), STUDDED LEATHER(4), Partial(5), SCALEMAIL(6), ANCESTRAL ARMOR(7), Half(8), Full(9), Boss Armor1(10), Boss Armor2(11), Boss Armor3(12), Wraith Armor(13)
+
+"alert_target" Triggers when monster gets alerted.
+"deathtarget" Triggers when monster dies.
+"fleetarget" Where monster runs to when it goes to fleeing mood.
+(point_combat or point_flee)
+*/
+
+/*QUAKED monster_agath (1 0 0) (-36.37 -38.12 -47.9) (44.08 39.76 39.65) Ambush Trigger_Spawn Sight
+TRIGGER_SPAWN info: If entity is spawned by triggering, and DOESN'T have moodname set, it will behave as if
+it was in the level already, and was triggered. (Attack player or take "moodname" info from trigger)
+
+The Agathodaemon.  Only used in the finale of the game, shoots fireballs
+and explosion death rays while hovering about in its inherent
+invincibility.
+*/
+
+/*QUAKED monster_carnivean (1 0 0) (-35.17 -52.95 -38.57) (34.11 36.9 36.7) Ambush Trigger/GSM_Spawn Sight Team_Leader Init_Talk Fearless Attack
+model="models/monsters/carniv.md2
+
+TRIGGER_SPAWN info: If entity is spawned by triggering, and DOESN'T have moodname set, it will behave as if
+it was in the level already, and was triggered. (Attack player or take "moodname" info from trigger)
+Team_Leader sets one monster entity to lead the team.
+ATTACK makes trigger_spawn monsters attack immediately when spawned
+
+"team" all monster entities with matching team name will be used, one monster entity in each team must be Team_Leader
+"inventory" object's inventory
+example: "weapon_sword,1,item_book1,1"
+
+"moodname" sets the AI behavior
+-wandering (default)
+-guarding  (Set guard radius with "guard_distance")
+-fleeing
+-standing
+-waiting
+-dormant
+-patrolling
+-mission
+-critical mission
+-running
+-dead
+Refer "moods.doc" for behaviour.
+
+"moodtime" sets the how long (in secs) the mood will last from start of the level.
+0)lasts forever 
+When the mood wears off they will go into "lastmoodname"
+
+"lastmoodname" - Theoretically the mood they were in "previously"
+"lastmoodtime" - How much time was supposedly left on their previous mood (0 for forever)
+
+"alert_mood" - In which mood monster goes when it gets alerted
+"alert_time" - How many seconds they stay in alert_mood, after that they go to the previous mood (or "lastmoodname")
+
+"attack_msg" Message to diplay as a chat in place of the traditional "hey!" alert sound
+
+"aggression" Modify the AI 
+"paranoia" Modify the AI 
+"morale" Modify the AI 
+
+"sight_range" Number of "units" the entity can see.
+
+"health" & "armor", set by numbers, armor values: (12 being the strongest)
+Skin(1), Fur(2), Cloth(3), STUDDED LEATHER(4), Partial(5), SCALEMAIL(6), ANCESTRAL ARMOR(7), Half(8), Full(9), Boss Armor1(10), Boss Armor2(11), Boss Armor3(12), Wraith Armor(13)
+
+"alert_target" Triggers when monster gets alerted.
+"deathtarget" Triggers when monster dies.
+"fleetarget" Where monster runs to when it goes to fleeing mood. (point_combat or point_flee)
+*/
+
+/*QUAKED monster_outrider (1 0 0) (-16 -16 -24) (16 16 32) Ambush Trigger/GSM_Spawn Sight Team_Leader Init_Talk Fearless Attack
+model="models/monsters/outrider.md2"
+
+TRIGGER_SPAWN info: If entity is spawned by triggering, and DOESN'T have moodname set, it will behave as if
+it was in the level already, and was triggered. (Attack player or take "moodname" info from trigger)
+Team_Leader sets one monster entity to lead the team.
+ATTACK makes trigger_spawn monsters attack immediately when spawned
+
+"team" all monster entities with matching team name will be used, one monster entity in each team must be Team_Leader
+"inventory" object's inventory
+example: "weapon_sword,1,item_book1,1"
+
+"moodname" sets the AI behavior
+-wandering (default)
+-guarding  (Set guard radius with "guard_distance")
+-fleeing
+-standing
+-waiting
+-dormant
+-patrolling
+-mission
+-critical mission
+-running
+-dead
+Refer "moods.doc" for behaviour.
+
+"moodtime" sets the how long (in secs) the mood will last from start of the level.
+0)lasts forever 
+When the mood wears off they will go into "lastmoodname"
+
+"lastmoodname" - Theoretically the mood they were in "previously"
+"lastmoodtime" - How much time was supposedly left on their previous mood (0 for forever)
+
+"alert_mood" - In which mood monster goes when it gets alerted
+"alert_time" - How many seconds they stay in alert_mood, after that they go to the previous mood (or "lastmoodname")
+
+"attack_msg" Message to diplay as a chat in place of the traditional "hey!" alert sound
+
+"aggression" Modify the AI 
+"paranoia" Modify the AI 
+"morale" Modify the AI 
+
+"sight_range" Number of "units" the entity can see.
+
+"health" & "armor", set by numbers, armor values: (12 being the strongest)
+Skin(1), Fur(2), Cloth(3), STUDDED LEATHER(4), Partial(5), SCALEMAIL(6), ANCESTRAL ARMOR(7), Half(8), Full(9), Boss Armor1(10), Boss Armor2(11), Boss Armor3(12), Wraith Armor(13)
+
+"skill", change aiming accuracy (10 is about perfect aiming, 1 is normal and 0.1 is pathetic)
+
+"alert_target" Triggers when monster gets alerted.
+"deathtarget" Triggers when monster dies.
+"fleetarget" Where monster runs to when it goes to fleeing mood. (point_combat or point_flee)
+
+"skinnum" Set skin number
+0) outrid01.pcx - default          (H:25 A:None)
+1) outrid02.pcx - dirty, outdoors  (H:25 A:Cloth)
+2) outrid03.pcx - available
+3) outrid04.pcx - available
+*/
+
+/*QUAKED monster_wraith	(1 0 0) (-16 -16 -24) (16 16 32) Ambush Trigger/GSM_Spawn Sight Team_Leader Init_Talk Fearless Attack
+model="models/monsters/wraith.md2"
+
+TRIGGER_SPAWN info: If entity is spawned by triggering, and DOESN'T have moodname set, it will behave as if
+it was in the level already, and was triggered. (Attack player or take "moodname" info from trigger)
+Team_Leader sets one monster entity to lead the "team".
+ATTACK makes trigger_spawn monsters attack immediately when spawned (wraith wont go invisible if Fearless is set on it)
+
+"team" all monster entities with matching team name will be used, one monster entity in each team must be Team_Leader
+"inventory" object's inventory
+example: "weapon_sword,1,item_book1,1"
+
+"moodname" sets the AI behavior
+-wandering (default)
+-guarding  (Set guard radius with "guard_distance")
+-fleeing
+-standing
+-waiting
+-dormant
+-patrolling
+-mission
+-critical mission
+-running
+-dead
+Refer "moods.doc" for behaviour.
+
+"moodtime" sets the how long (in secs) the mood will last from start of the level.
+0)lasts forever 
+When the mood wears off they will go into "lastmoodname"
+
+"lastmoodname" - Theoretically the mood they were in "previously"
+"lastmoodtime" - How much time was supposedly left on their previous mood (0 for forever)
+
+"alert_mood" - In which mood monster goes when it gets alerted
+"alert_time" - How many seconds they stay in alert_mood, after that they go to the previous mood (or "lastmoodname")
+
+"attack_msg" Message to diplay as a chat in place of the traditional "hey!" alert sound
+
+"aggression" Modify the AI 
+"paranoia" Modify the AI 
+"morale" Modify the AI 
+
+"sight_range" Number of "units" the entity can see.
+
+"health" & "armor", set by numbers, armor values: (12 being the strongest)
+Skin(1), Fur(2), Cloth(3), STUDDED LEATHER(4), Partial(5), SCALEMAIL(6), ANCESTRAL ARMOR(7), Half(8), Full(9), Boss Armor1(10), Boss Armor2(11), Boss Armor3(12), Wraith Armor(13)
+
+"alert_target" Triggers when monster gets alerted.
+"deathtarget" Triggers when monster dies.
+"fleetarget" Where monster runs to when it goes to fleeing mood. (point_combat or point_flee)
+*/
+
+/*QUAKED monster_scout (1 0 0) (-16 -16 -24) (16 16 32) Ambush Trigger/GSM_Spawn Sight Team_Leader Init_Talk Fearless Attack
+model="models/monsters/scout.md2"
+
+TRIGGER_SPAWN info: If entity is spawned by triggering, and DOESN'T have moodname set, it will behave as if
+it was in the level already, and was triggered. (Attack player or take "moodname" info from trigger)
+Team_Leader sets one monster entity to lead the "team".
+ATTACK makes trigger_spawn monsters attack immediately when spawned
+
+"team" all monster entities with matching team name will be used, one monster entity in each team must be Team_Leader
+"inventory" object's inventory
+example: "weapon_sword,1,item_book1,1"
+
+"moodname" sets the AI behavior
+-wandering (default)
+-guarding  (Set guard radius with "guard_distance")
+-fleeing
+-standing
+-waiting
+-dormant
+-patrolling
+-mission
+-critical mission
+-running
+-dead
+Refer "moods.doc" for behaviour.
+
+"moodtime" sets the how long (in secs) the mood will last from start of the level.
+0)lasts forever 
+When the mood wears off they will go into "lastmoodname"
+
+"lastmoodname" - Theoretically the mood they were in "previously"
+"lastmoodtime" - How much time was supposedly left on their previous mood (0 for forever)
+
+"alert_mood" - In which mood monster goes when it gets alerted
+"alert_time" - How many seconds they stay in alert_mood, after that they go to the previous mood (or "lastmoodname")
+
+"attack_msg" Message to diplay as a chat in place of the traditional "hey!" alert sound
+
+"aggression" Modify the AI 
+"paranoia" Modify the AI 
+"morale" Modify the AI 
+
+"sight_range" Number of "units" the entity can see.
+
+"health" & "armor", set by numbers, armor values: (12 being the strongest)
+Skin(1), Fur(2), Cloth(3), STUDDED LEATHER(4), Partial(5), SCALEMAIL(6), ANCESTRAL ARMOR(7), Half(8), Full(9), Boss Armor1(10), Boss Armor2(11), Boss Armor3(12), Wraith Armor(13)
+
+"alert_target" Triggers when monster gets alerted.
+"deathtarget" Triggers when monster dies.
+"fleetarget" Where monster runs to when it goes to fleeing mood. (point_combat or point_flee)
+
+"skinnum" Set skin number
+0) scout01.pcx - default           (H:25 A:None)
+1) scout02.pcx - red guard/leader  (H:35 A:Partial Plate)
+2) scout03.pcx - dirty, outdoors   (H:30 A:Cloth)
+3) scout04.pcx - bloody (available)
+*/
+
+/*QUAKED monster_hound (1 0 0) (-16 -16 -24) (16 16 32) Ambush Trigger/GSM_Spawn Sight Team_Leader Init_Talk Fearless Attack
+model="models/monsters/hound.md2"
+
+TRIGGER_SPAWN info: If entity is spawned by triggering, and DOESN'T have moodname set, it will behave as if
+it was in the level already, and was triggered. (Attack player or take "moodname" info from trigger)
+Team_Leader sets one monster entity to lead the "team".
+ATTACK makes trigger_spawn monsters attack immediately when spawned
+
+"team" all monster entities with matching team name will be used, one monster entity in each team must be Team_Leader
+"inventory" object's inventory
+example: "weapon_sword,1,item_book1,1"
+
+"moodname" sets the AI behavior
+-wandering (default)
+-guarding  (Set guard radius with "guard_distance")
+-fleeing
+-standing
+-waiting
+-dormant
+-patrolling
+-mission
+-critical mission
+-running
+-dead
+Refer "moods.doc" for behaviour.
+
+"moodtime" sets the how long (in secs) the mood will last from start of the level.
+0)lasts forever 
+When the mood wears off they will go into "lastmoodname"
+
+"lastmoodname" - Theoretically the mood they were in "previously"
+"lastmoodtime" - How much time was supposedly left on their previous mood (0 for forever)
+
+"alert_mood" - In which mood monster goes when it gets alerted
+"alert_time" - How many seconds they stay in alert_mood, after that they go to the previous mood (or "lastmoodname")
+
+"attack_msg" Message to diplay as a chat in place of the traditional "hey!" alert sound
+
+"aggression" Modify the AI 
+"paranoia" Modify the AI 
+"morale" Modify the AI 
+
+"sight_range" Number of "units" the entity can see.
+
+"health" & "armor", set by numbers, armor values: (12 being the strongest)
+Skin(1), Fur(2), Cloth(3), STUDDED LEATHER(4), Partial(5), SCALEMAIL(6), ANCESTRAL ARMOR(7), Half(8), Full(9), Boss Armor1(10), Boss Armor2(11), Boss Armor3(12), Wraith Armor(13)
+
+"alert_target" Triggers when monster gets alerted.
+"deathtarget" Triggers when monster dies.
+"fleetarget" Where monster runs to when it goes to fleeing mood. (point_combat or point_flee)
+*/
+
+/*QUAKED monster_hellhound (1 0 0) (-15 -15 -23) (15 15 16) Ambush Trigger/GSM_Spawn Sight Team_Leader Init_Talk Fearless Attack
+model="models/monsters/hhound.md2"
+
+TRIGGER_SPAWN info: If entity is spawned by triggering, and DOESN'T have moodname set, it will behave as if
+it was in the level already, and was triggered. (Attack player or take "moodname" info from trigger)
+Team_Leader sets one monster entity to lead the "team".
+ATTACK makes trigger_spawn monsters attack immediately when spawned
+
+"team" all monster entities with matching team name will be used, one monster entity in each team must be Team_Leader
+"inventory" object's inventory
+example: "weapon_sword,1,item_book1,1"
+
+"moodname" sets the AI behavior
+-wandering (default)
+-guarding  (Set guard radius with "guard_distance")
+-fleeing
+-standing
+-waiting
+-dormant
+-patrolling
+-mission
+-critical mission
+-running
+-dead
+Refer "moods.doc" for behaviour.
+
+"moodtime" sets the how long (in secs) the mood will last from start of the level.
+0)lasts forever 
+When the mood wears off they will go into "lastmoodname"
+
+"lastmoodname" - Theoretically the mood they were in "previously"
+"lastmoodtime" - How much time was supposedly left on their previous mood (0 for forever)
+
+"alert_mood" - In which mood monster goes when it gets alerted
+"alert_time" - How many seconds they stay in alert_mood, after that they go to the previous mood (or "lastmoodname")
+
+"attack_msg" Message to diplay as a chat in place of the traditional "hey!" alert sound
+
+"aggression" Modify the AI 
+"paranoia" Modify the AI 
+"morale" Modify the AI 
+
+"sight_range" Number of "units" the entity can see.
+
+"health" & "armor", set by numbers, armor values: (12 being the strongest)
+Skin(1), Fur(2), Cloth(3), STUDDED LEATHER(4), Partial(5), SCALEMAIL(6), ANCESTRAL ARMOR(7), Half(8), Full(9), Boss Armor1(10), Boss Armor2(11), Boss Armor3(12), Wraith Armor(13)
+
+"alert_target" Triggers when monster gets alerted.
+"deathtarget" Triggers when monster dies.
+"fleetarget" Where monster runs to when it goes to fleeing mood. (point_combat or point_flee)
+*/
+
+/*QUAKED monster_captain (1 0 0) (-16 -16 -24) (16 16 32) Ambush Trigger/GSM_Spawn Sight Team_Leader Init_Talk Fearless Attack
+model="models/monsters/captain.md2"
+
+TRIGGER_SPAWN info: If entity is spawned by triggering, and DOESN'T have moodname set, it will behave as if
+it was in the level already, and was triggered. (Attack player or take "moodname" info from trigger)
+Team_Leader sets one monster entity to lead the "team".
+ATTACK makes trigger_spawn monsters attack immediately when spawned
+
+"team" all monster entities with matching team name will be used, one monster entity in each team must be Team_Leader
+"inventory" object's inventory
+example: "weapon_sword,1,item_book1,1"
+
+"moodname" sets the AI behavior
+-wandering (default)
+-guarding  (Set guard radius with "guard_distance")
+-fleeing
+-standing
+-waiting
+-dormant
+-patrolling
+-mission
+-critical mission
+-running
+-dead
+Refer "moods.doc" for behaviour.
+
+"moodtime" sets the how long (in secs) the mood will last from start of the level.
+0)lasts forever 
+When the mood wears off they will go into "lastmoodname"
+
+"lastmoodname" - Theoretically the mood they were in "previously"
+"lastmoodtime" - How much time was supposedly left on their previous mood (0 for forever)
+
+"alert_mood" - In which mood monster goes when it gets alerted
+"alert_time" - How many seconds they stay in alert_mood, after that they go to the previous mood (or "lastmoodname")
+
+"attack_msg" Message to diplay as a chat in place of the traditional "hey!" alert sound
+
+"aggression" Modify the AI 
+"paranoia" Modify the AI 
+"morale" Modify the AI 
+
+"sight_range" Number of "units" the entity can see.
+
+"health" & "armor", set by numbers, armor values: (12 being the strongest)
+Skin(1), Fur(2), Cloth(3), STUDDED LEATHER(4), Partial(5), SCALEMAIL(6), ANCESTRAL ARMOR(7), Half(8), Full(9), Boss Armor1(10), Boss Armor2(11), Boss Armor3(12), Wraith Armor(13)
+
+"alert_target" Triggers when monster gets alerted.
+"deathtarget" Triggers when monster dies.
+"fleetarget" Where monster runs to when it goes to fleeing mood. (point_combat or point_flee)
+
+"skinnum" Set skin number
+0) Captain.pcx - default (H:100 A:Fullplate)
+*/
+
+/*QUAKED monster_crescent (1 0 0) (-16 -16 -24) (16 16 32) Ambush Trigger/GSM_Spawn Sight Team_Leader Init_Talk Fearless Attack
+model="models/monsters/crescent.md2"
+
+TRIGGER_SPAWN info: If entity is spawned by triggering, and DOESN'T have moodname set, it will behave as if
+it was in the level already, and was triggered. (Attack player or take "moodname" info from trigger)
+Team_Leader sets one monster entity to lead the "team".
+ATTACK makes trigger_spawn monsters attack immediately when spawned
+
+"team" all monster entities with matching team name will be used, one monster entity in each team must be Team_Leader
+"inventory" object's inventory
+example: "weapon_sword,1,item_book1,1"
+
+"moodname" sets the AI behavior
+-wandering (default)
+-guarding  (Set guard radius with "guard_distance")
+-fleeing
+-standing
+-waiting
+-dormant
+-patrolling
+-mission
+-critical mission
+-running
+-dead
+Refer "moods.doc" for behaviour.
+
+"moodtime" sets the how long (in secs) the mood will last from start of the level.
+0)lasts forever 
+When the mood wears off they will go into "lastmoodname"
+
+"lastmoodname" - Theoretically the mood they were in "previously"
+"lastmoodtime" - How much time was supposedly left on their previous mood (0 for forever)
+
+"alert_mood" - In which mood monster goes when it gets alerted
+"alert_time" - How many seconds they stay in alert_mood, after that they go to the previous mood (or "lastmoodname")
+
+"attack_msg" Message to diplay as a chat in place of the traditional "hey!" alert sound
+
+"aggression" Modify the AI 
+"paranoia" Modify the AI 
+"morale" Modify the AI 
+
+"sight_range" Number of "units" the entity can see.
+
+"health" & "armor", set by numbers, armor values: (12 being the strongest)
+Skin(1), Fur(2), Cloth(3), STUDDED LEATHER(4), Partial(5), SCALEMAIL(6), ANCESTRAL ARMOR(7), Half(8), Full(9), Boss Armor1(10), Boss Armor2(11), Boss Armor3(12), Wraith Armor(13)
+
+"alert_target" Triggers when monster gets alerted.
+"deathtarget" Triggers when monster dies.
+"fleetarget" Where monster runs to when it goes to fleeing mood. (point_combat or point_flee)
+
+"skinnum" Set skin number
+0) Crescen1.pcx - default              (H:45 A:Halfplate)
+1) Crescen2.pcx - cannoneer            (H:30 A:Cloth)
+2) Crescen3.pcx - pilot                (H:30 A:Cloth)
+3) Crescen4.pcx - available
+*/
+
+/*QUAKED monster_dweller (1 0 0) (-16 -16 -24) (16 16 32) Ambush Trigger/GSM_Spawn Sight Team_Leader Init_Talk Fearless Attack
+model="models/monsters/dweller.md2"
+
+TRIGGER_SPAWN info: If entity is spawned by triggering, and DOESN'T have moodname set, it will behave as if
+it was in the level already, and was triggered. (Attack player or take "moodname" info from trigger)
+If Dweller is spawned by triggering (spawnflag 2), they play "unearth" animation when they spawn.
+
+"team" all monster entities with matching team name will be used, one monster entity in each team must be Team_Leader
+"inventory" object's inventory
+example: "weapon_sword,1,item_book1,1"
+
+"moodname" sets the AI behavior
+-wandering (default)
+-guarding  (Set guard radius with "guard_distance")
+-fleeing
+-standing
+-waiting
+-dormant
+-patrolling
+-mission
+-critical mission
+-running
+-dead
+Refer "moods.doc" for behaviour.
+
+"moodtime" sets the how long (in secs) the mood will last from start of the level.
+0)lasts forever 
+When the mood wears off they will go into "lastmoodname"
+
+"lastmoodname" - Theoretically the mood they were in "previously"
+"lastmoodtime" - How much time was supposedly left on their previous mood (0 for forever)
+
+"alert_mood" - In which mood monster goes when it gets alerted
+"alert_time" - How many seconds they stay in alert_mood, after that they go to the previous mood (or "lastmoodname")
+
+"attack_msg" Message to diplay as a chat in place of the traditional "hey!" alert sound
+
+"aggression" Modify the AI 
+"paranoia" Modify the AI 
+"morale" Modify the AI 
+
+"sight_range" Number of "units" the entity can see.
+
+"health" & "armor", set by numbers, armor values: (12 being the strongest)
+Skin(1), Fur(2), Cloth(3), STUDDED LEATHER(4), Partial(5), SCALEMAIL(6), ANCESTRAL ARMOR(7), Half(8), Full(9), Boss Armor1(10), Boss Armor2(11), Boss Armor3(12), Wraith Armor(13)
+
+"alert_target" Triggers when monster gets alerted.
+"deathtarget" Triggers when monster dies.
+"fleetarget" Where monster runs to when it goes to fleeing mood. (point_combat or point_flee)
+*/
+
+/*QUAKED monster_necromancer (1 0 0) (-16 -16 -24) (16 16 32) Ambush Trigger/GSM_Spawn Sight Team_Leader Init_Talk Fearless Attack
+model="models/monsters/necro.md2"
+
+TRIGGER_SPAWN info: If entity is spawned by triggering, and DOESN'T have moodname set, it will behave as if
+it was in the level already, and was triggered. (Attack player or take "moodname" info from trigger)
+Team_Leader sets one monster entity to lead the "team".
+ATTACK makes trigger_spawn monsters attack immediately when spawned
+
+"team" all monster entities with matching team name will be used, one monster entity in each team must be Team_Leader
+"inventory" object's inventory
+example: "weapon_sword,1,item_book1,1"
+
+"moodname" sets the AI behavior
+-wandering (default)
+-guarding  (Set guard radius with "guard_distance")
+-fleeing
+-standing
+-waiting
+-dormant
+-patrolling
+-mission
+-critical mission
+-running
+-dead
+Refer "moods.doc" for behaviour.
+
+"moodtime" sets the how long (in secs) the mood will last from start of the level.
+0)lasts forever 
+When the mood wears off they will go into "lastmoodname"
+
+"lastmoodname" - Theoretically the mood they were in "previously"
+"lastmoodtime" - How much time was supposedly left on their previous mood (0 for forever)
+
+"alert_mood" - In which mood monster goes when it gets alerted
+"alert_time" - How many seconds they stay in alert_mood, after that they go to the previous mood (or "lastmoodname")
+
+"attack_msg" Message to diplay as a chat in place of the traditional "hey!" alert sound
+
+"aggression" Modify the AI 
+"paranoia" Modify the AI 
+"morale" Modify the AI 
+
+"sight_range" Number of "units" the entity can see.
+
+"health" & "armor", set by numbers, armor values: (12 being the strongest)
+Skin(1), Fur(2), Cloth(3), STUDDED LEATHER(4), Partial(5), SCALEMAIL(6), ANCESTRAL ARMOR(7), Half(8), Full(9), Boss Armor1(10), Boss Armor2(11), Boss Armor3(12), Wraith Armor(13)
+
+"alert_target" Triggers when monster gets alerted.
+"deathtarget" Triggers when monster dies.
+"fleetarget" Where monster runs to when it goes to fleeing mood. (point_combat or point_flee)
+*/
+
+/*QUAKED monster_tormentor (1 0 0) (-16 -16 -24) (16 16 32) Ambush Trigger/GSM_Spawn Sight Team_Leader Init_Talk Fearless Attack
+model="models/monsters/torment.md2"
+
+TRIGGER_SPAWN info: If entity is spawned by triggering, and DOESN'T have moodname set, it will behave as if
+it was in the level already, and was triggered. (Attack player or take "moodname" info from trigger)
+Team_Leader sets one monster entity to lead the "team".
+ATTACK makes trigger_spawn monsters attack immediately when spawned
+
+"team" all monster entities with matching team name will be used, one monster entity in each team must be Team_Leader
+"inventory" object's inventory
+example: "weapon_sword,1,item_book1,1"
+
+"moodname" sets the AI behavior
+-wandering (default)
+-guarding  (Set guard radius with "guard_distance")
+-fleeing
+-standing
+-waiting
+-dormant
+-patrolling
+-mission
+-critical mission
+-running
+-dead
+Refer "moods.doc" for behaviour.
+
+"moodtime" sets the how long (in secs) the mood will last from start of the level.
+0)lasts forever 
+When the mood wears off they will go into "lastmoodname"
+
+"lastmoodname" - Theoretically the mood they were in "previously"
+"lastmoodtime" - How much time was supposedly left on their previous mood (0 for forever)
+
+"alert_mood" - In which mood monster goes when it gets alerted
+"alert_time" - How many seconds they stay in alert_mood, after that they go to the previous mood (or "lastmoodname")
+
+"attack_msg" Message to diplay as a chat in place of the traditional "hey!" alert sound
+
+"aggression" Modify the AI 
+"paranoia" Modify the AI 
+"morale" Modify the AI 
+
+"sight_range" Number of "units" the entity can see.
+
+"health" & "armor", set by numbers, armor values: (12 being the strongest)
+Skin(1), Fur(2), Cloth(3), STUDDED LEATHER(4), Partial(5), SCALEMAIL(6), ANCESTRAL ARMOR(7), Half(8), Full(9), Boss Armor1(10), Boss Armor2(11), Boss Armor3(12), Wraith Armor(13)
+
+"alert_target" Triggers when monster gets alerted.
+"deathtarget" Triggers when monster dies.
+"fleetarget" Where monster runs to when it goes to fleeing mood. (point_combat or point_flee)
+*/
+
+/*QUAKED monster_tenebrion (1 0 0) (-16 -16 -24) (16 16 32) Ambush Trigger/GSM_Spawn Sight Team_Leader Init_Talk Fearless Attack
+model="models/monsters/teneb.md2"
+
+TRIGGER_SPAWN info: If entity is spawned by triggering, and DOESN'T have moodname set, it will behave as if
+it was in the level already, and was triggered. (Attack player or take "moodname" info from trigger)
+Team_Leader sets one monster entity to lead the "team".
+ATTACK makes trigger_spawn monsters attack immediately when spawned
+
+"team" all monster entities with matching team name will be used, one monster entity in each team must be Team_Leader
+"inventory" object's inventory
+example: "weapon_sword,1,item_book1,1"
+
+"moodname" sets the AI behavior
+-wandering (default)
+-guarding  (Set guard radius with "guard_distance")
+-fleeing
+-standing
+-waiting
+-dormant
+-patrolling
+-mission
+-critical mission
+-running
+-dead
+Refer "moods.doc" for behaviour.
+
+"moodtime" sets the how long (in secs) the mood will last from start of the level.
+0)lasts forever 
+When the mood wears off they will go into "lastmoodname"
+
+"lastmoodname" - Theoretically the mood they were in "previously"
+"lastmoodtime" - How much time was supposedly left on their previous mood (0 for forever)
+
+"alert_mood" - In which mood monster goes when it gets alerted
+"alert_time" - How many seconds they stay in alert_mood, after that they go to the previous mood (or "lastmoodname")
+
+"attack_msg" Message to diplay as a chat in place of the traditional "hey!" alert sound
+
+"aggression" Modify the AI 
+"paranoia" Modify the AI 
+"morale" Modify the AI 
+
+"sight_range" Number of "units" the entity can see.
+
+"health" & "armor", set by numbers, armor values: (12 being the strongest)
+Skin(1), Fur(2), Cloth(3), STUDDED LEATHER(4), Partial(5), SCALEMAIL(6), ANCESTRAL ARMOR(7), Half(8), Full(9), Boss Armor1(10), Boss Armor2(11), Boss Armor3(12), Wraith Armor(13)
+
+"alert_target" Triggers when monster gets alerted.
+"deathtarget" Triggers when monster dies.
+"fleetarget" Where monster runs to when it goes to fleeing mood. (point_combat or point_flee)
+*/
+
+/*QUAKED monster_merc_sword (1 0 0) (-16 -16 -24) (16 16 32) Ambush Trigger/GSM_Spawn Sight Team_Leader Init_Talk Fearless Attack
+model="models/monsters/merc_s.md2"
+
+TRIGGER_SPAWN info: If entity is spawned by triggering, and DOESN'T have moodname set, it will behave as if
+it was in the level already, and was triggered. (Attack player or take "moodname" info from trigger)
+Team_Leader sets one monster entity to lead the "team".
+ATTACK makes trigger_spawn monsters attack immediately when spawned
+
+"team" all monster entities with matching team name will be used, one monster entity in each team must be Team_Leader
+"inventory" object's inventory
+example: "weapon_sword,1,item_book1,1"
+
+"moodname" sets the AI behavior
+-wandering (default)
+-guarding  (Set guard radius with "guard_distance")
+-fleeing
+-standing
+-waiting
+-dormant
+-patrolling
+-mission
+-critical mission
+-running
+-dead
+-partying
+Refer "moods.doc" for behaviour.
+
+"moodtime" sets the how long (in secs) the mood will last from start of the level.
+0)lasts forever 
+When the mood wears off they will go into "lastmoodname"
+
+"lastmoodname" - Theoretically the mood they were in "previously"
+"lastmoodtime" - How much time was supposedly left on their previous mood (0 for forever)
+
+"alert_mood" - In which mood monster goes when it gets alerted
+"alert_time" - How many seconds they stay in alert_mood, after that they go to the previous mood (or "lastmoodname")
+
+"attack_msg" Message to diplay as a chat in place of the traditional "hey!" alert sound
+
+"aggression" Modify the AI 
+"paranoia" Modify the AI 
+"morale" Modify the AI 
+
+"sight_range" Number of "units" the entity can see.
+
+"health" & "armor", set by numbers, armor values: (12 being the strongest)
+Skin(1), Fur(2), Cloth(3), STUDDED LEATHER(4), Partial(5), SCALEMAIL(6), ANCESTRAL ARMOR(7), Half(8), Full(9), Boss Armor1(10), Boss Armor2(11), Boss Armor3(12), Wraith Armor(13)
+
+"alert_target" Triggers when monster gets alerted.
+"deathtarget" Triggers when monster dies.
+"fleetarget" Where monster runs to when it goes to fleeing mood. (point_combat or point_flee)
+
+"skinnum" Set skin number
+0) merc_s1.pcx - default               (H:25 A:Partial plate)
+1) merc_s2.pcx - light                 (H:30 A:Cloth)
+2) merc_s3.pcx - heavy plate Sergeant  (H:40 A:Halfplate)
+3) merc_s4.pcx - scout                 (H:25 A:Cloth)
+*/
+
+/*QUAKED monster_merc_axe (1 0 0) (-16 -16 -24) (16 16 32) Ambush Trigger/GSM_Spawn Sight Team_Leader Init_Talk Fearless Attack
+model="models/monsters/merc_a.md2"
+
+TRIGGER_SPAWN info: If entity is spawned by triggering, and DOESN'T have moodname set, it will behave as if
+it was in the level already, and was triggered. (Attack player or take "moodname" info from trigger)
+Team_Leader sets one monster entity to lead the "team".
+ATTACK makes trigger_spawn monsters attack immediately when spawned
+
+"team" all monster entities with matching team name will be used, one monster entity in each team must be Team_Leader
+"inventory" object's inventory
+example: "weapon_sword,1,item_book1,1"
+
+"moodname" sets the AI behavior
+-wandering (default)
+-guarding  (Set guard radius with "guard_distance")
+-fleeing
+-standing
+-waiting
+-dormant
+-patrolling
+-mission
+-critical mission
+-running
+-dead
+-partying
+Refer "moods.doc" for behaviour.
+
+"moodtime" sets the how long (in secs) the mood will last from start of the level.
+0)lasts forever 
+When the mood wears off they will go into "lastmoodname"
+
+"lastmoodname" - Theoretically the mood they were in "previously"
+"lastmoodtime" - How much time was supposedly left on their previous mood (0 for forever)
+
+"alert_mood" - In which mood monster goes when it gets alerted
+"alert_time" - How many seconds they stay in alert_mood, after that they go to the previous mood (or "lastmoodname")
+
+"attack_msg" Message to diplay as a chat in place of the traditional "hey!" alert sound
+
+"aggression" Modify the AI 
+"paranoia" Modify the AI 
+"morale" Modify the AI 
+
+"sight_range" Number of "units" the entity can see.
+
+"health" & "armor", set by numbers, armor values: (12 being the strongest)
+Skin(1), Fur(2), Cloth(3), STUDDED LEATHER(4), Partial(5), SCALEMAIL(6), ANCESTRAL ARMOR(7), Half(8), Full(9), Boss Armor1(10), Boss Armor2(11), Boss Armor3(12), Wraith Armor(13)
+
+"skill", change aiming accuracy (10 is about perfect aiming, 1 is normal and 0.1 is pathetic)
+
+"alert_target" Triggers when monster gets alerted.
+"deathtarget" Triggers when monster dies.
+"fleetarget" Where monster runs to when it goes to fleeing mood. (point_combat or point_flee)
+
+"skinnum" Set skin number
+0) merc_a1.pcx -  default               (H:25 A:Studded leather)
+1) merc_a2.pcx - heavy plate Sergeant   (H:40 A:Halfplate)
+2) merc_a3.pcx - plate                  (H:30 A:Scalemail)
+3) merc_a4.pcx - Minor change from first skin (H:25 A:Studded leather)
+*/
+
+/*QUAKED monster_merc_xbow (1 0 0) (-16 -16 -24) (16 16 32) Ambush Trigger/GSM_Spawn Sight Team_Leader Init_Talk Fearless Attack
+model="models/monsters/merc_x.md2"
+
+TRIGGER_SPAWN info: If entity is spawned by triggering, and DOESN'T have moodname set, it will behave as if
+it was in the level already, and was triggered. (Attack player or take "moodname" info from trigger)
+Team_Leader sets one monster entity to lead the "team".
+ATTACK makes trigger_spawn monsters attack immediately when spawned
+
+"team" all monster entities with matching team name will be used, one monster entity in each team must be Team_Leader
+"inventory" object's inventory
+example: "weapon_sword,1,item_book1,1"
+
+"moodname" sets the AI behavior
+-wandering (default)
+-guarding  (Set guard radius with "guard_distance")
+-fleeing
+-standing
+-waiting
+-dormant
+-patrolling
+-mission
+-critical mission
+-running
+-dead
+-partying
+Refer "moods.doc" for behaviour.
+
+"moodtime" sets the how long (in secs) the mood will last from start of the level.
+0)lasts forever 
+When the mood wears off they will go into "lastmoodname"
+
+"lastmoodname" - Theoretically the mood they were in "previously"
+"lastmoodtime" - How much time was supposedly left on their previous mood (0 for forever)
+
+"alert_mood" - In which mood monster goes when it gets alerted
+"alert_time" - How many seconds they stay in alert_mood, after that they go to the previous mood (or "lastmoodname")
+
+"attack_msg" Message to diplay as a chat in place of the traditional "hey!" alert sound
+
+"aggression" Modify the AI 
+"paranoia" Modify the AI 
+"morale" Modify the AI 
+
+"sight_range" Number of "units" the entity can see.
+
+"health" & "armor", set by numbers, armor values: (12 being the strongest)
+Skin(1), Fur(2), Cloth(3), STUDDED LEATHER(4), Partial(5), SCALEMAIL(6), ANCESTRAL ARMOR(7), Half(8), Full(9), Boss Armor1(10), Boss Armor2(11), Boss Armor3(12), Wraith Armor(13)
+
+"skill", change aiming accuracy (10 is about perfect aiming, 1 is normal and 0.1 is pathetic)
+
+"alert_target" Triggers when monster gets alerted.
+"deathtarget" Triggers when monster dies.
+"fleetarget" Where monster runs to when it goes to fleeing mood. (point_combat or point_flee)
+
+"skinnum" Set skin number
+0) merc_x1.pcx - scout           (H:25 A:Cloth)
+1) merc_x2.pcx - light           (H:30 A:Studded Leather)
+2) merc_x3.pcx - plate           (H:35 A:Partial Plate)
+3) merc_x4.pcx - plate / leader  (H:35 A:Halfplate)
+*/
+
+/*QUAKED monster_sultan (1 .5 0) (-12 -12 -32) (12 12 25) NONE NONE NONE
+NONE Init_Talk Fearless
+model="models/npcs/insnvlg.md2"
+"inventory" object's inventory
+example: "weapon_sword,1,item_book1,1"
+
+"name" Name of the NPC (in conversation)
+"datafile" file with conversation
+
+"moodname" sets the AI behavior
+-wandering (default)
+-guarding  (Set guard radius with "guard_distance")
+-fleeing
+-standing
+-waiting
+-dormant
+-patrolling
+-mission
+-critical mission
+-running
+-dead
+Refer "moods.doc" for behaviour.
+
+"moodtime" sets the how long (in secs) the mood will last from start of the
+level.
+0)lasts forever
+When the mood wears off they will go into wandering mode.
+
+"lastmoodname" - Theoretically the mood they were in "previously"
+"lastmoodtime" - How much time was supposedly left on their previous mood (0
+for forever)
+"alert_mood" -The mood they enter when they see Roarke
+
+"attack_msg" Message to display as a chat in place of the traditional "hey!"
+alert sound
+
+"aggression" Modify the AI
+"paranoia" Modify the AI
+"morale" Modify the AI
+
+"sight_range" Number of "units" the entity can see.
+*/
+
+/*QUAKED monster_pilot (1 0 0) (-16 -16 -24) (16 16 32) Ambush
+Trigger/GSM_Spawn Sight Team_Leader Init_Talk Fearless Attack
+model="models/monsters/crescent.md2"
+
+USE SKINNUM "2"!!!!
+
+TRIGGER_SPAWN info: If entity is spawned by triggering, and DOESN'T have
+moodname set, it will behave as if
+it was in the level already, and was triggered. (Attack player or take
+"moodname" info from trigger)
+Team_Leader sets one monster entity to lead the "team".
+ATTACK makes trigger_spawn monsters attack immediately when spawned
+
+"team" all monster entities with matching team name will be used, one
+monster entity in each team must be Team_Leader
+"inventory" object's inventory
+example: "weapon_sword,1,item_book1,1"
+
+"moodname" sets the AI behavior
+-wandering (default)
+-guarding  (Set guard radius with "guard_distance")
+-fleeing
+-standing
+-waiting
+-dormant
+-patrolling
+-mission
+-critical mission
+-running
+-dead
+Refer "moods.doc" for behaviour.
+
+"moodtime" sets the how long (in secs) the mood will last from start of the
+level.
+0)lasts forever
+When the mood wears off they will go into "lastmoodname"
+
+"lastmoodname" - Theoretically the mood they were in "previously"
+"lastmoodtime" - How much time was supposedly left on their previous mood (0
+for forever)
+
+"alert_mood" - In which mood monster goes when it gets alerted
+"alert_time" - How many seconds they stay in alert_mood, after that they go
+to the previous mood (or "lastmoodname")
+
+"attack_msg" Message to diplay as a chat in place of the traditional "hey!"
+alert sound
+
+"aggression" Modify the AI
+"paranoia" Modify the AI
+"morale" Modify the AI
+
+"sight_range" Number of "units" the entity can see.
+
+"health" & "armor", set by numbers, armor values: (12 being the strongest)
+Skin(1), Fur(2), Cloth(3), STUDDED LEATHER(4), Partial(5), SCALEMAIL(6), ANCESTRAL ARMOR(7), Half(8), Full(9), Boss Armor1(10), Boss Armor2(11), Boss Armor3(12), Wraith Armor(13)
+
+"alert_target" Triggers when monster gets alerted.
+"deathtarget" Triggers when monster dies.
+"fleetarget" Where monster runs to when it goes to fleeing mood.
+(point_combat or point_flee)
+
+DON'T USE ANY OTHER SKINNUM THAN "2" UNLESS REQUESTED!!!!
+"skinnum" Set skin number
+0) Crescen1.pcx - default              (H:45 A:Halfplate)
+1) Crescen2.pcx - cannoneer            (H:30 A:Cloth)
+2) Crescen3.pcx - pilot                (H:30 A:Cloth)
+3) Crescen4.pcx - available
+*/
+
+/////////////////////////////////////////////////// END monster_ SECTION
+
+
+/*QUAKED animal_fish (.5 .3 0) (-4 -8 -4) (4 8 4) x trigger_spawn
+model="models/animals/fish1.md2"
+"target" first path_corner
+
+"moodname" sets the AI behavior
+-wandering (default)
+-guarding  (Set guard radius with "guard_distance")
+-fleeing
+-standing
+-waiting
+-dormant
+-patrolling
+-mission
+-critical mission
+-running
+-dead
+Refer "moods.doc" for behaviour.
+
+"moodtime" sets the how long (in secs) the mood will last from start of the level.
+0)lasts forever 
+When the mood wears off they will go into "lastmoodname".
+
+"lastmoodname" - Theoretically the mood they were in "previously"
+"lastmoodtime" - How much time was supposedly left on their previous mood (0 for forever)
+
+"attack_msg" Message to diplay as a chat in place of the traditional "hey!" alert sound
+
+"aggression" Modify the AI 
+"paranoia" Modify the AI 
+"morale" Modify the AI 
+
+"sight_range" Number of "units" the entity can see.
+*/
+
+/*QUAKED animal_vulture (0.5 .3 0) (-8 -16 -12) (8 16 12) x trigger_spawn
+model="models/animals/vulture.md2"
+"target" first path corner
+
+"moodname" sets the AI behavior
+-wandering (default)
+-guarding  (Set guard radius with "guard_distance")
+-fleeing
+-standing
+-waiting
+-dormant
+-patrolling
+-mission
+-critical mission
+-running
+-dead
+Refer "moods.doc" for behaviour.
+
+"moodtime" sets the how long (in secs) the mood will last from start of the level.
+0)lasts forever 
+When the mood wears off they will go into "lastmoodname".
+
+"lastmoodname" - Theoretically the mood they were in "previously"
+"lastmoodtime" - How much time was supposedly left on their previous mood (0 for forever)
+
+"attack_msg" Message to diplay as a chat in place of the traditional "hey!" alert sound
+
+"aggression" Modify the AI 
+"paranoia" Modify the AI 
+"morale" Modify the AI 
+
+"sight_range" Number of "units" the entity can see.
+*/
+
+/*QUAKED animal_camel (.5 .3 0) (-8 -16 -20) (8 16 0) x trigger_spawn
+model="models/animals/camel.md2"
+"target" first path_corner
+
+"moodname" sets the AI behavior
+-wandering (default)
+-guarding  (Set guard radius with "guard_distance")
+-fleeing
+-standing
+-waiting
+-dormant
+-patrolling
+-mission
+-critical mission
+-running
+-dead
+Refer "moods.doc" for behaviour.
+
+"moodtime" sets the how long (in secs) the mood will last from start of the level.
+0)lasts forever 
+When the mood wears off they will go into "lastmoodname".
+
+"lastmoodname" - Theoretically the mood they were in "previously"
+"lastmoodtime" - How much time was supposedly left on their previous mood (0 for forever)
+
+"attack_msg" Message to diplay as a chat in place of the traditional "hey!" alert sound
+
+"aggression" Modify the AI 
+"paranoia" Modify the AI 
+"morale" Modify the AI 
+
+"sight_range" Number of "units" the entity can see.
+*/
+
+/*QUAKED animal_goat (.5 .3 0) (-20 -6 -19) (20 6 19) x trigger_spawn
+model="models/animals/goat.md2"
+"target" first path_corner
+
+"moodname" sets the AI behavior
+-wandering (default)
+-guarding  (Set guard radius with "guard_distance")
+-fleeing
+-standing
+-waiting
+-dormant
+-patrolling
+-mission
+-critical mission
+-running
+-dead
+Refer "moods.doc" for behaviour.
+
+"moodtime" sets the how long (in secs) the mood will last from start of the level.
+0)lasts forever 
+When the mood wears off they will go into "lastmoodname".
+
+"lastmoodname" - Theoretically the mood they were in "previously"
+"lastmoodtime" - How much time was supposedly left on their previous mood (0 for forever)
+
+"attack_msg" Message to diplay as a chat in place of the traditional "hey!" alert sound
+
+"aggression" Modify the AI 
+"paranoia" Modify the AI 
+"morale" Modify the AI 
+
+"sight_range" Number of "units" the entity can see.
+*/
+
+
+/////////////////////////////////////////////////// END ANIMAL_ SECTION
+
+
+//AMMO ARE BLUE
+
+/*QUAKED ammo_arrows (.3 .3 1) (-16 -16 -16) (16 16 16)
+model="models/weapons/ammo/g_arrow.md2"
+*/
+
+/*QUAKED ammo_farrows (.3 .3 1) (-16 -16 -16) (16 16 16)
+model="models/weapons/ammo/g_farrow.md2"
+*/
+
+/*QUAKED ammo_bolts (.3 .3 1) (-16 -16 -16) (16 16 16)
+model="models/weapons/ammo/g_bolt.md2"
+*/
+
+/*QUAKED ammo_ebolts (.3 .3 1) (-16 -16 -16) (16 16 16)
+*/
+
+/*QUAKED ammo_dballs (.3 .3 1) (-16 -16 -16) (16 16 16)
+model="models/weapons/ammo/g_dballs.md2"
+*/
+
+
+/////////////////////////////////////////////////// END AMMO_ SECTION
+
+
+// ITEMS AUTOMATICALLY DROP TO BRUSH, SO PLACE THEM ABOVE BRUSH
+
+/*QUAKED item_book1 (.3 .5 .5) (-4 -6 -2) (4 6 2) TRIGGER/GSM_SPAWN
+model="models/objects/book1.md2"
+book:1 --- 128 index of book in books.txt
+"main" & "minor" flip a GSM flag when player reads the book
+*/
+
+/*QUAKED item_bottle1 (.3 .5 .5) (-2 -2 -6) (2 2 6) TRIGGER/GSM_SPAWN
+model="models/objects/bottle1.md2"
+*/
+
+/*QUAKED item_bowl (.3 .5 .5) (-8 -8 -5) (8 8 5) TRIGGER/GSM_SPAWN
+model="models/objects/bowl.md2"
+*/
+
+/*QUAKED item_bread (.3 .5 .5) (-4 -6 -4) (4 6 4) TRIGGER/GSM_SPAWN
+model="models/objects/bread.md2"
+*/
+
+/*QUAKED item_shovel (.3 .5 .5) (-4 -4 -18) (4 4 18) TRIGGER/GSM_SPAWN x x x x x x x x x x x x NO_DROP
+model="models/objects/shovel.md2"
+SPAWNFLAGS 8192 = NO_DROP
+*/
+
+/*QUAKED item_vase1 (.3 .5 .5) (-6 -6 -8) (6 6 8) TRIGGER/GSM_SPAWN
+model="models/objects/vase1.md2"
+*/
+
+/*QUAKED item_w_flask (.3 .5 .5) (-4 -4 -6) (4 4 6) TRIGGER/GSM_SPAWN
+model="models/objects/flask.md2"
+water flask
+*/
+
+/*QUAKED item_p_flask (.3 .5 .5) (-4 -4 -6) (4 4 6) TRIGGER/GSM_SPAWN
+model="models/objects/flask.md2"
+Poison flask
+*/
+
+/*QUAKED item_o_flask (.3 .5 .5) (-4 -4 -6) (4 4 6) TRIGGER/GSM_SPAWN
+model="models/objects/flask.md2"
+oil flask
+*/
+
+/*QUAKED item_b_flask (.3 .5 .5) (-4 -4 -6) (4 4 6) TRIGGER/GSM_SPAWN
+model="models/objects/flask.md2"
+bile flask - DON'T USE!!
+*/
+
+/*QUAKED item_r_flask (.3 .5 .5) (-4 -4 -6) (4 4 6) TRIGGER/GSM_SPAWN
+model="models/objects/flask.md2"
+rejuvination flask
+*/
+
+/*QUAKED item_h_flask (.3 .5 .5) (-4 -4 -6) (4 4 6) TRIGGER/GSM_SPAWN
+model="models/objects/flask.md2"
+health flask
+*/
+
+/*QUAKED item_bl_flask (.3 .5 .5) (-4 -4 -6) (4 4 6) TRIGGER/GSM_SPAWN
+model="models/objects/flask.md2"
+blur flask
+*/
+
+/*QUAKED item_q_flask (.3 .5 .5) (-4 -4 -6) (4 4 6) TRIGGER/GSM_SPAWN
+model="models/objects/flask.md2"
+quickness flask
+*/
+
+/*QUAKED item_torch (.3 .5 .5) (-4 -4 -6) (4 4 6) TRIGGER/GSM_SPAWN
+No Model.. use at item in inventory.
+*/
+
+/*QUAKED item_leather (.3 .5 .5) (-16 -16 -16) (16 16 16) TRIGGER/GSM_SPAWN
+No Model.. use at item in inventory.
+LEATHER ARMOR
+*/
+
+/*QUAKED item_scalemail (.3 .5 .5) (-16 -16 -16) (16 16 16) TRIGGER/GSM_SPAWN
+No Model.. use at item in inventory.
+SCALEMAIL ARMOR
+*/
+
+/*QUAKED item_armor (.3 .5 .5) (-16 -16 -16) (16 16 16) TRIGGER/GSM_SPAWN
+No Model.. use at item in inventory.
+ANSCESTRAL ARMOR
+*/
+
+
+/////////////////////////////////////////////////// END ITEM_  SECTION
+
+
+// KEYS AUTOMATICALLY DROP TO BRUSH, SO PLACE SOME UNITS ABOVE BRUSH
+
+/*QUAKED key_metal (.3 .5 .5) (-2 -2 -4) (2 2 4) TRIGGER/GSM_SPAWN
+model="models/objects/key.md2"
+*/
+
+/*QUAKED key_silver (.3 .5 .5) (-2 -2 -4) (2 2 4) TRIGGER/GSM_SPAWN
+model="models/objects/key.md2"
+*/
+
+/*QUAKED key_gold (.3 .5 .5) (-2 -2 -4) (2 2 4) TRIGGER/GSM_SPAWN
+model="models/objects/key.md2"
+*/
+
+/*QUAKED key_glass (.3 .5 .5) (-2 -2 -4) (2 2 4) TRIGGER/GSM_SPAWN
+model="models/objects/key.md2"
+*/
+
+
+/////////////////////////////////////////////////// END KEY_  SECTION
+
+
+/*QUAKED object_barrel (0 .5 .8) (-10 -10 -14) (10 10 14) BRL_NOMOVE BRL_EXPLODING TRIGGER/GSM_SPAWN
+model="models/objects/barrel.md2"
+Barrel. You can override its mass (100),
+health (30), and dmg (150), (for moving and exploding).
+*/
+
+/*QUAKED object_campfire (1 .5 .5) (-10 -10 -5) (10 10 5) TRIGGER/GSM_SPAWN
+model="models/objects/campfire.md2"
+"sounds"
+0) no sound (default)
+1) sound
+*/
+
+/*QUAKED object_cart (1 .5 .5) (-20 -20 -20) (20 20 20) TRIGGER/GSM_SPAWN
+// NOT IMPLEMENTED YET!!
+*/
+
+/*QUAKED object_cauldron (0 .5 .8) (-8 -11 -8) (8 11 8) TRIGGER/GSM_SPAWN
+model="models/objects/cauldron.md2"
+
+"inventory" - To setup puzzles ("inventory"/"item_w_flask,1")
+
+	SET SPAWNFLAGS 4096 (NO_COOP?)
+
+	All possible items:
+		item_w_flask
+		item_o_flask
+		item_b_flask
+		item_p_flask
+		item_root
+		item_p_bowl
+		item_time
+		item_space
+		item_energy
+		item_matter
+		item_vase1
+		item_bolts
+		item_piston
+
+	"message" Spawns at +activate for unfinished puzzle. (Without it tells the needed ingredients)
+	"message2" Spawns when puzzle is finished
+
+target_gsm : use only target_gsm with GSM_USE_SET spawnflag (used only when all items are in)
+*/
+
+/*QUAKED object_chest1 (1 .5 .5) (-7 -12 -7) (7 12 7) TRIGGER/GSM_SPAWN x x x x x x x x x x x x x x LOCKED
+model="models/objects/chest1.md2"
+LOCKED if you want locked door without items (key)you must set LOCKED flag 32768
+"inventory" object's inventory
+example: "weapon_sword,1,item_book1,1"
+
+"target_gsm_name" target_gsm -> targetname
+
+"skinnum" Set skin number
+0) Chest1a.pcx - Wooden, red strips
+1) Chest1b.pcx - Darkened chest
+2) Chest1c.pcx - Same as above, but wooden parts are green
+3) Chest1d.pcx - Metal chest
+4) Chest1e.pcx - Metal, red sides
+5) Chest1f.pcx - Wooden, has some symbols on it
+6) Chest1g.pcx - Golden chest
+7) Chest1h.pcx - Metal chest, slightly dirty
+
+Things that doesn't have models: (Can be in any inventory, monster's or NPC's as well)
+"item_torch" - Torch, may have model later(?) so it's defined as entity in this file too
+"item_root" - Amaranth root
+"item_p_bowl" - Purified water
+"item_time" - Cipher Piece 1
+"item_space" - Cipher Piece 2
+"item_energy" - Cipher Piece 3
+"item_matter" - Cipher Piece 4
+"ammo_cballs" - Cannon Balls
+*/
+
+/*QUAKED object_demonorb (1 0 0) (-8 -8 -8) (8 8 8)
+*/
+
+/*QUAKED object_flag (1 .5 .5) (-20 -4 -8) (20 4 8) TRIGGER/GSM_SPAWN
+model="models/objects/flag.md2"
+*/
+
+/*QUAKED object_flame1 (1 .5 .5) (-3 -3 -6) (3 3 11) TRIGGER/GSM_SPAWN
+model="models/objects/flame1.md2"
+"sounds" NOTE>dont have more sounds
+0) no sound (default)
+1) sound torch
+2) sound campfire
+*/
+
+/*QUAKED object_goyle1 (1 .5 .5) (-18 -18 -45) (18 18 17)
+model="models/objects/goyle.md2"
+*/
+
+/*QUAKED object_goyle2 (1 .5 .5) (-16 -16 -45) (16 16 8)
+model="models/objects/goyle.md2"
+*/
+
+/*QUAKED object_goyle3 (1 .5 .5) (-12 -12 -45) (12 12 35)
+model="models/objects/goyle.md2"
+*/
+
+/*QUAKED object_goyle4 (1 .5 .5) (-12 -12 -45) (12 12 35)
+model="models/objects/goyle.md2"
+*/
+
+/*QUAKED object_goyle5 (1 .5 .5) (-20 -20 -45) (20 20 0)
+model="models/objects/goyle.md2"
+*/
+
+/*QUAKED object_torch (1 .5 .5) (-2 -4 -6) (2 4 6) TRIGGER/GSM_SPAWN
+model="models/objects/torch.md2"
+"sounds"
+0) no sound (default)
+1) sound
+*/
+
+/*QUAKED object_big_fire(1 .5 .5) (-10 -10 -9) (10 10 4) TRIGGER/GSM_SPAWN
+model="models/objects/bigfire.md2"
+"sounds"
+0) no sound (default)
+1) sound
+*/
+
+/*QUAKED object_banner(1 .5 .5) (-2 -4 -52) (2 4 52) TRIGGER/GSM_SPAWN
+model="models/objects/banner.md2"
+*/
+
+/*QUAKED object_pennant(1 .5 .5) (-8 -50 -14) (8 50 14) TRIGGER/GSM_SPAWN
+model="models/objects/pennant.md2"
+*/
+
+/*QUAKED object_statue(1 .5 .5) (-12 -12 -44) (12 12 44) TRIGGER/GSM_SPAWN
+model="models/objects/statue.md2"
+Default health is 200
+
+"skinnum" Set skin number
+0) statue.pcx - Metallic, greenish.
+1) statue2.pcx - Golden.
+2) statue3.pcx - Magical.
+*/
+
+/*QUAKED object_throne(1 .5 .5) (-22 -22 -35) (22 22 35) TRIGGER/GSM_SPAWN
+model="models/objects/throne.md2"
+*/
+
+/////////////////////////////////////////////////// END OBJECTS_ SECTION
+
+
+// PLANTS ARE GREEN 
+
+/*QUAKED plant_deadtree1 (0 1 0) (-6 -6 -47) (6 6 47)
+model="models/plants/deadtree1.md2"
+sounds : 0 (default) no sound
+1- 16  bird01.wav - bird16.wav
+*/
+
+/*QUAKED plant_deadtree2 (0 1 0) (-6 -6 -46) (6 6 44)
+model="models/plants/deadtree2.md2"
+sounds : 0 (default) no sound
+1- 16  bird01.wav - bird16.wav
+*/
+
+/*QUAKED plant_deadtree3 (0 1 0) (-8 -8 -78) (8 8 80)
+model="models/plants/deadtree3.md2"
+sounds : 0 (default) no sound
+1- 16  bird01.wav - bird16.wav
+*/
+
+/*QUAKED plant_deadtree4 (0 1 0) (-8 -8 -80) (8 8 84)
+model="models/plants/deadtree4.md2"
+sounds : 0 (default) no sound
+1- 16  bird01.wav - bird16.wav
+*/
+
+/*QUAKED plant_plant1 (0 1 0) (-12 -5 -14) (12 5 13)
+model="models/plants/plant.md2"
+sounds : 0 (default) no sound
+1- 16  bird01.wav - bird16.wav
+*/
+
+/*QUAKED plant_plant2 (0 1 0) (-9 -9 -9) (9 9 9)
+model="models/plants/plant.md2"
+sounds : 0 (default) no sound
+1- 16  bird01.wav - bird16.wav
+*/
+
+/*QUAKED plant_plant3 (0 1 0) (-19 -19 -1) (19 19 1)
+model="models/plants/plant.md2"
+sounds : 0 (default) no sound
+1- 16  bird01.wav - bird16.wav
+*/
+
+/*QUAKED plant_plant4 (0 1 0) (-24 -14 -1) (24 14 1)
+model="models/plants/plant.md2"
+sounds : 0 (default) no sound
+1- 16  bird01.wav - bird16.wav
+*/
+
+/*QUAKED plant_plant5 (0 1 0) (-1 -24 -12) (1 24 12)
+model="models/plants/plant.md2"
+sounds : 0 (default) no sound
+1- 16  bird01.wav - bird16.wav
+*/
+
+/*QUAKED plant_plant6 (0 1 0) (-1 -8 -20) (1 8 20)
+model="models/plants/plant.md2"
+sounds : 0 (default) no sound
+1- 16  bird01.wav - bird16.wav
+*/
+
+/*QUAKED plant_plant7 (0 1 0) (-20 -20 -12) (20 20 12)
+model="models/plants/plant.md2"
+sounds : 0 (default) no sound
+1- 16  bird01.wav - bird16.wav
+*/
+
+/*QUAKED plant_plant8 (0 1 0) (-10 -20 -8) (10 20 8)
+model="models/plants/plant.md2"
+sounds : 0 (default) no sound
+1- 16  bird01.wav - bird16.wav
+*/
+
+/*QUAKED plant_tallbush (0 1 0) (-17 -19 -27) (17 19 27)
+model="models/plants/tallbush.md2"
+sounds : 0 (default) no sound
+1- 16  bird01.wav - bird16.wav
+*/
+
+/*QUAKED plant_tree1 (0 1 0) (-3 -3 -78) (10 10 44)
+model="models/plants/tree1.md2"
+sounds : 0 (default) no sound
+1- 16  bird01.wav - bird16.wav
+*/
+
+/*QUAKED plant_tree2 (0 1 0) (-10 -10 -94) (10 10 90)
+model="models/plants/tree2.md2"
+sounds : 0 (default) no sound
+1- 16  bird01.wav - bird16.wav
+*/
+
+/*QUAKED plant_widebush (0 1 0) (-17 -17 -15) (17 17 15)
+model="models/plants/widebush.md2"
+sounds : 0 (default) no sound
+1- 16  bird01.wav - bird16.wav
+*/
+
+
+/////////////////////////////////////////////////// END PLANTS_ SECTION
+
+
+/*QUAKED npc_insvilgr (1 .5 0) (-12 -12 -24) (12 12 32) Ambush Trigger/GSM_Spawn Sight NONE Init_Talk Fearless
+model="models/npcs/insnvlg.md2"
+"inventory" object's inventory
+example: "weapon_sword,1,item_book1,1"
+
+"name" Name of the NPC (in conversation)
+"datafile" file with conversation
+
+"moodname" sets the AI behavior
+-wandering (default)
+-guarding  (Set guard radius with "guard_distance")
+-fleeing
+-standing
+-waiting
+-dormant
+-patrolling
+-mission
+-critical mission
+-running
+-dead
+Refer "moods.doc" for behaviour.
+
+"moodtime" sets the how long (in secs) the mood will last from start of the level.
+0)lasts forever 
+When the mood wears off they will go into wandering mode.
+
+"lastmoodname" - Theoretically the mood they were in "previously"
+"lastmoodtime" - How much time was supposedly left on their previous mood (0 for forever)
+"alert_mood" -The mood they enter when they see Roarke
+
+"attack_msg" Message to display as a chat in place of the traditional "hey!" alert sound
+
+"aggression" Modify the AI 
+"paranoia" Modify the AI 
+"morale" Modify the AI 
+
+"sight_range" Number of "units" the entity can see.
+*/
+
+/*QUAKED npc_femvilgr (1 .5 0) (-12 -12 -24) (12 12 32) Ambush Trigger/GSM_Spawn Sight NONE Init_Talk Fearless
+model="models/npcs/femvilg.md2"
+"inventory" object's inventory
+example: "weapon_sword,1,item_book1,1"
+
+"name" Name of the NPC (in conversation)
+"datafile" file with conversation
+
+"moodname" sets the AI behavior
+-wandering (default)
+-guarding  (Set guard radius with "guard_distance")
+-fleeing
+-standing
+-waiting
+-dormant
+-patrolling
+-mission
+-critical mission
+-running
+-dead
+Refer "moods.doc" for behaviour.
+
+"moodtime" sets the how long (in secs) the mood will last from start of the level.
+0)lasts forever 
+When the mood wears off they will go into wandering mode.
+
+"lastmoodname" - Theoretically the mood they were in "previously"
+"lastmoodtime" - How much time was supposedly left on their previous mood (0 for forever)
+"alert_mood" -The mood they enter when they see Roarke
+
+"attack_msg" Message to display as a chat in place of the traditional "hey!" alert sound
+
+"aggression" Modify the AI 
+"paranoia" Modify the AI 
+"morale" Modify the AI 
+
+"sight_range" Number of "units" the entity can see.
+
+"skinnum" Set skin number
+0) femvilg1.pcx - Brown regular clothes
+1) femvilg2.pcx - Reddish regular clothes
+2) femvilg3.pcx - Witch (Adrianna)
+3) femvilg4.pcx - Worn out clothes (Peasant)
+4) femvilg5.pcx - Worn out clothes (Grey peasant)
+5) femvilg6.pcx - Baa'Chee Sister (Cheitan)
+6) femvilg7.pcx - Shamash Daughter (Lucitanian)
+7) femvilg8.pcx - [Available]
+*/
+
+/*QUAKED npc_malvilgr (1 .5 0) (-12 -12 -24) (12 12 32) Ambush Trigger/GSM_Spawn Sight NONE Init_Talk Fearless
+model="models/npcs/malvilg.md2"
+"inventory" object's inventory
+example: "weapon_sword,1,item_book1,1"
+
+"name" Name of the NPC (in conversation)
+"datafile" file with conversation
+
+"moodname" sets the AI behavior
+-wandering (default)
+-guarding  (Set guard radius with "guard_distance")
+-fleeing
+-standing
+-waiting
+-dormant
+-patrolling
+-mission
+-critical mission
+-running
+-dead
+Refer "moods.doc" for behaviour.
+
+"moodtime" sets the how long (in secs) the mood will last from start of the level.
+0)lasts forever 
+When the mood wears off they will go into wandering mode.
+
+"lastmoodname" - Theoretically the mood they were in "previously"
+"lastmoodtime" - How much time was supposedly left on their previous mood (0 for forever)
+"alert_mood" -The mood they enter when they see Roarke
+
+"attack_msg" Message to display as a chat in place of the traditional "hey!" alert sound
+
+"aggression" Modify the AI 
+"paranoia" Modify the AI 
+"morale" Modify the AI 
+
+"sight_range" Number of "units" the entity can see.
+
+"skinnum" Set skin number
+0) malvilg1.pcx - Regular clothes (villager)
+1) malvilg2.pcx - Regular clothes (villager)
+2) malvilg3.pcx - Regular clothes (villager)
+3) malvilg4.pcx - Regular clothes (villager)
+4) malvilg5.pcx - Regular clothes (villager)
+5) malvilg6.pcx - Regular clothes (villager)
+6) malvilg7.pcx - Regular clothes (old villager)
+7) malvilg8.pcx - Worn out clothes (poor villager)
+*/
+
+/*QUAKED npc_moktosk (1 .5 0) (-12 -12 -24) (12 12 32) Ambush Trigger/GSM_Spawn Sight NONE Init_Talk Fearless
+Special model for Moktar or Ratatosk
+"inventory" object's inventory
+example: "weapon_sword,1,item_book1,1"
+
+"name" Name of the NPC (in conversation)
+"datafile" file with conversation
+
+"moodname" sets the AI behavior
+-wandering (default)
+-guarding  (Set guard radius with "guard_distance")
+-fleeing
+-standing
+-waiting
+-dormant
+-patrolling
+-mission
+-critical mission
+-running
+-dead
+Refer "moods.doc" for behaviour.
+
+"moodtime" sets the how long (in secs) the mood will last from start of the level.
+0)lasts forever 
+When the mood wears off they will go into wandering mode.
+
+"lastmoodname" - Theoretically the mood they were in "previously"
+"lastmoodtime" - How much time was supposedly left on their previous mood (0 for forever)
+"alert_mood" -The mood they enter when they see Roarke
+
+"attack_msg" Message to display as a chat in place of the traditional "hey!" alert sound
+
+"aggression" Modify the AI 
+"paranoia" Modify the AI 
+"morale" Modify the AI 
+
+"sight_range" Number of "units" the entity can see.
+
+"skinnum" Set skin number
+0) moktar.pcx - Moktar
+1) ratatosk.pcx - Ratatosk
+*/
+
+/*QUAKED npc_boy (1 .5 0) (-12 -12 -24) (12 12 32) Ambush Trigger/GSM_Spawn Sight NONE Init_Talk Fearless
+model="models/npcs/boy.md2"
+"inventory" object's inventory
+example: "weapon_sword,1,item_book1,1"
+
+"name" Name of the NPC (in conversation)
+"datafile" file with conversation
+
+"moodname" sets the AI behavior
+-wandering (default)
+-guarding  (Set guard radius with "guard_distance")
+-fleeing
+-standing
+-waiting
+-dormant
+-patrolling
+-mission
+-critical mission
+-running
+-dead
+Refer "moods.doc" for behaviour.
+
+"moodtime" sets the how long (in secs) the mood will last from start of the level.
+0)lasts forever 
+When the mood wears off they will go into wandering mode.
+
+"lastmoodname" - Theoretically the mood they were in "previously"
+"lastmoodtime" - How much time was supposedly left on their previous mood (0 for forever)
+"alert_mood" -The mood they enter when they see Roarke
+
+"attack_msg" Message to display as a chat in place of the traditional "hey!" alert sound
+
+"aggression" Modify the AI 
+"paranoia" Modify the AI 
+"morale" Modify the AI 
+
+"sight_range" Number of "units" the entity can see.
+
+"skinnum" Set skin number
+0) boy1.pcx - Purple clothes, green waistcoat
+1) boy2.pcx - Brown clothes, blue waistcoat
+2) boy3.pcx - Green shirt, brown trousers
+3) boy4.pcx - Orange shirt, brown trousers
+*/
+
+/*QUAKED npc_girl (1 .5 0) (-12 -12 -24) (12 12 32) Ambush Trigger/GSM_Spawn Sight NONE Init_Talk Fearless
+model="models/npcs/girl.md2"
+"inventory" object's inventory
+example: "weapon_sword,1,item_book1,1"
+
+"name" Name of the NPC (in conversation)
+"datafile" file with conversation
+
+"moodname" sets the AI behavior
+-wandering (default)
+-guarding  (Set guard radius with "guard_distance")
+-fleeing
+-standing
+-waiting
+-dormant
+-patrolling
+-mission
+-critical mission
+-running
+-dead
+Refer "moods.doc" for behaviour.
+
+"moodtime" sets the how long (in secs) the mood will last from start of the level.
+0)lasts forever 
+When the mood wears off they will go into wandering mode.
+
+"lastmoodname" - Theoretically the mood they were in "previously"
+"lastmoodtime" - How much time was supposedly left on their previous mood (0 for forever)
+"alert_mood" -The mood they enter when they see Roarke
+
+"attack_msg" Message to display as a chat in place of the traditional "hey!" alert sound
+
+"aggression" Modify the AI 
+"paranoia" Modify the AI 
+"morale" Modify the AI 
+
+"sight_range" Number of "units" the entity can see.
+
+"skinnum" Set skin number
+0) girl1.pcx - Fancy, brown
+1) girl2.pcx - Poor, brown (peasant)
+2) girl3.pcx - Poor, red (Peasant)
+3) girl4.pcx - Fancy, blue dress
+*/
+
+/*QUAKED npc_worker (1 .5 0) (-12 -12 -24) (12 12 32) Ambush Trigger/GSM_Spawn Sight NONE Init_Talk Fearless
+model="models/npcs/mslave.md2"
+"inventory" object's inventory
+example: "weapon_sword,1,item_book1,1"
+
+"name" Name of the NPC (in conversation)
+"datafile" file with conversation
+
+"moodname" sets the AI behavior
+-wandering (default)
+-guarding  (Set guard radius with "guard_distance")
+-fleeing
+-standing
+-waiting
+-dormant
+-patrolling
+-mission
+-critical mission
+-running
+-dead
+Refer "moods.doc" for behaviour.
+
+"moodtime" sets the how long (in secs) the mood will last from start of the level.
+0)lasts forever 
+When the mood wears off they will go into wandering mode.
+
+"lastmoodname" - Theoretically the mood they were in "previously"
+"lastmoodtime" - How much time was supposedly left on their previous mood (0 for forever)
+"alert_mood" -The mood they enter when they see Roarke
+
+"attack_msg" Message to display as a chat in place of the traditional "hey!" alert sound
+
+"aggression" Modify the AI 
+"paranoia" Modify the AI 
+"morale" Modify the AI 
+
+"sight_range" Number of "units" the entity can see.
+
+"skinnum" Set skin number
+0) mslave1.pcx - Villager
+1) mslave2.pcx - Cheitan worker
+2) mslave3.pcx - Villager (old man)
+3) mslave4.pcx - Cheitan worker (Bald guy)
+4) mslave5.pcx - Whipped up guy (bloody slave)
+5) mslave6.pcx - Lucitanian soldier prisoner
+6) mslave7.pcx - Fisherman
+7) mslave8.pcx - Seamus
+*/
+
+/*QUAKED npc_mslave (1 .5 0) (-12 -12 -24) (12 12 32) Ambush Trigger/GSM_Spawn Sight NONE Init_Talk Fearless
+model="models/npcs/mslave.md2" + "models/npcs/pickaxe.md2"
+"inventory" object's inventory
+example: "weapon_sword,1,item_book1,1"
+
+"name" Name of the NPC (in conversation)
+"datafile" file with conversation
+
+"moodname" sets the AI behavior
+-wandering (default)
+-guarding  (Set guard radius with "guard_distance")
+-fleeing
+-standing
+-waiting
+-dormant
+-patrolling
+-mission
+-critical mission
+-running
+-dead
+Refer "moods.doc" for behaviour.
+
+"moodtime" sets the how long (in secs) the mood will last from start of the level.
+0)lasts forever 
+When the mood wears off they will go into wandering mode.
+
+"lastmoodname" - Theoretically the mood they were in "previously"
+"lastmoodtime" - How much time was supposedly left on their previous mood (0 for forever)
+"alert_mood" -The mood they enter when they see Roarke
+
+"attack_msg" Message to display as a chat in place of the traditional "hey!" alert sound
+
+"aggression" Modify the AI 
+"paranoia" Modify the AI 
+"morale" Modify the AI 
+
+"sight_range" Number of "units" the entity can see.
+
+"skinnum" Set skin number
+0) mslave1.pcx - Villager
+1) mslave2.pcx - Cheitan worker
+2) mslave3.pcx - Villager (old man)
+3) mslave4.pcx - Cheitan worker (Bald guy)
+4) mslave5.pcx - Whipped up guy (bloody slave)
+5) mslave6.pcx - Lucitanian soldier prisoner
+6) mslave7.pcx - Fisherman
+7) mslave8.pcx - Seamus
+*/
+
+/*QUAKED npc_fslave (1 .5 0) (-12 -12 -24) (12 12 32) Ambush Trigger/GSM_Spawn Sight NONE Init_Talk Fearless
+model="models/npcs/fslave.md2"
+"inventory" object's inventory
+example: "weapon_sword,1,item_book1,1"
+
+"name" name of npc
+"datafile" file with conversation
+
+"moodname" sets the AI behavior
+-wandering (default)
+-guarding  (Set guard radius with "guard_distance")
+-fleeing
+-standing
+-waiting
+-dormant
+-patrolling
+-mission
+-critical mission
+-running
+-dead
+Refer "moods.doc" for behaviour.
+
+"moodtime" sets the how long (in secs) the mood will last from start of the level.
+0)lasts forever 
+When the mood wears off they will go into wandering mode.
+
+"lastmoodname" - Theoretically the mood they were in "previously"
+"lastmoodtime" - How much time was supposedly left on their previous mood (0 for forever)
+"alert_mood" -The mood they enter when they see Roarke
+
+"attack_msg" Message to diplay as a chat in place of the traditional "hey!" alert sound
+
+"aggression" Modify the AI 
+"paranoia" Modify the AI 
+"morale" Modify the AI 
+
+"sight_range" Number of "units" the entity can see.
+
+"skinnum" Set skin number
+0) fslave1.pcx - Slave (default)
+1) fslave2.pcx - Darker
+2) fslave3.pcx - Naked slave girl
+3) fslave4.pcx - Villager
+4) fslave5.pcx - Villager
+5) fslave6.pcx - Villager
+6) fslave7.pcx - Poor villager/new slave
+7) fslave8.pcx - Slave
+*/
+
+/////////////////////////////////////////////////// END NPC_ SECTION
+
+
+/*QUAKED effect_ripple	(1 .5 .8) (-8 -8 -8) (8 8 8)
+model="models/effects/ripple.md2"
+*/
+
+/*QUAKED effect_spirting (1 .5 .8) (-8 -8 -8) (8 8 8)
+"density" integer (default is 32)
+"target" at info_null, used for computing aim. if no set, aim is upwards
+"style" :
+SPLASH_SPARKS  1
+SPLASH_BLUE_WATER 2
+SPLASH_BROWN_WATER 3
+SPLASH_SLIME  4
+SPLASH_LAVA   5
+SPLASH_BLOOD  6
+*/
+
+
+/////////////////////////////////////////////////// END EFFECT_ SECTION
+
+/*QUAKED weapon_3gun	(1 0.5 0) (-16 -16 -16) (16 16 16)
+model="models/weapons/g_3gun.md2"
+*/
+/*QUAKED weapon_bow	(1 0.5 0) (-16 -16 -16) (16 16 16)
+model="models/weapons/g_bow.md2"
+*/
+/*QUAKED weapon_rifle	(1 0.5 0) (-16 -16 -16) (16 16 16)
+model="models/weapons/g_rifle.md2"
+*/
+/*QUAKED weapon_sword	(1 0.5 0) (-16 -16 -16) (16 16 16)
+*/
+/*QUAKED weapon_xbow	(1 0.5 0) (-16 -16 -16) (16 16 16)
+model="models/weapons/g_xbow.md2"
+*/
+
+/////////////////////////////////////////////////// END WEAPON_ SECTION
+
+
+/*QUAKED trigger_cam (1 .1 .1) ?
+Trigger brush used to trigger the static camera.
+"target" at cam_position and\or cam_aim
+*/
+
+/*QUAKED cam_position (1 .1 .1) (-8 -8 -8) (8 8 8)
+Position of the static camera.
+"targetname" must be targeted by trigger_cam
+*/
+
+/*QUAKED cam_aim (1 .1 .1) (-8 -8 -8) (8 8 8)
+The point at which the camera aims.
+Don't use if you wish the camera to follow the player.
+"targetname" must be targeted by trigger_cam
+*/
+
+
+/////////////////////////////////////////////////// END STATIC CAMERA SECTION
+/*QUAKED corpse_male1 (1 .1 .1) (-6 -6 -34) (6 6 27)
+model="models/npcs/mcorp1.md2"
+Crucifix, hung on cross - needs cross from brushes
+
+"skinnum" Set skin number
+0) mcorps1.pcx - Mutilated
+1) mcorps2.pcx - Burned corpse
+2) mcorps3.pcx - Mutilated
+3) mcorps4.pcx - Mutilated
+4) mcorps5.pcx - Extra mutilated
+5) mcorps6.pcx - Totally burned corpse
+6) mcorps7.pcx - Rotting corpse
+7) mcorps8.pcx - Lucitanian soldier
+*/
+
+/*QUAKED corpse_male2 (1 .1 .1) (-18 -11 -30) (16 3 -13)
+model="models/npcs/mcorp2.md2"
+Sitting, head resting on knees
+
+"skinnum" Set skin number
+0) mcorps1.pcx - Mutilated
+1) mcorps2.pcx - Burned corpse
+2) mcorps3.pcx - Mutilated
+3) mcorps4.pcx - Mutilated
+4) mcorps5.pcx - Extra mutilated
+5) mcorps6.pcx - Totally burned corpse
+6) mcorps7.pcx - Rotting corpse
+7) mcorps8.pcx - Lucitanian soldier
+*/
+
+/*QUAKED corpse_male3 (1 .1 .1) (-30 -10 -30) (32 10 -12)
+model="models/npcs/mcorp3.md2"
+Laying on the ground
+
+"skinnum" Set skin number
+0) mcorps1.pcx - Mutilated
+1) mcorps2.pcx - Burned corpse
+2) mcorps3.pcx - Mutilated
+3) mcorps4.pcx - Mutilated
+4) mcorps5.pcx - Extra mutilated
+5) mcorps6.pcx - Totally burned corpse
+6) mcorps7.pcx - Rotting corpse
+7) mcorps8.pcx - Lucitanian soldier
+*/
+
+/*QUAKED corpse_male4 (1 .1 .1) (-19 -11 -30) (17 11 0)
+model="models/npcs/mcorp4.md2"
+Leaning against a wall
+
+"skinnum" Set skin number
+0) mcorps1.pcx - Mutilated
+1) mcorps2.pcx - Burned corpse
+2) mcorps3.pcx - Mutilated
+3) mcorps4.pcx - Mutilated
+4) mcorps5.pcx - Extra mutilated
+5) mcorps6.pcx - Totally burned corpse
+6) mcorps7.pcx - Rotting corpse
+7) mcorps8.pcx - Lucitanian soldier
+*/
+
+/*QUAKED corpse_male5 (1 .1 .1) (-27 -16 -29) (26 11 -11)
+model="models/npcs/mcorp5.md2"
+Laying on the ground
+
+"skinnum" Set skin number
+0) mcorps1.pcx - Mutilated
+1) mcorps2.pcx - Burned corpse
+2) mcorps3.pcx - Mutilated
+3) mcorps4.pcx - Mutilated
+4) mcorps5.pcx - Extra mutilated
+5) mcorps6.pcx - Totally burned corpse
+6) mcorps7.pcx - Rotting corpse
+7) mcorps8.pcx - Lucitanian soldier
+*/
+
+/*QUAKED corpse_male6 (1 .1 .1) (-30 -14 -30) (30 14 17)
+model="models/npcs/mcorp6.md2"
+Laying on back, arms crossed
+
+"skinnum" Set skin number
+0) mcorps1.pcx - Mutilated
+1) mcorps2.pcx - Burned corpse
+2) mcorps3.pcx - Mutilated
+3) mcorps4.pcx - Mutilated
+4) mcorps5.pcx - Extra mutilated
+5) mcorps6.pcx - Totally burned corpse
+6) mcorps7.pcx - Rotting corpse
+7) mcorps8.pcx - Lucitanian soldier
+*/
+
+/*QUAKED corpse_male7 (1 .1 .1) (-8 -12 -34) (5 12 31)
+model="models/npcs/mcorp7.md2"
+Hung by feet.. rope not included. :P
+
+"skinnum" Set skin number
+0) mcorps1.pcx - Mutilated
+1) mcorps2.pcx - Burned corpse
+2) mcorps3.pcx - Mutilated
+3) mcorps4.pcx - Mutilated
+4) mcorps5.pcx - Extra mutilated
+5) mcorps6.pcx - Totally burned corpse
+6) mcorps7.pcx - Rotting corpse
+7) mcorps8.pcx - Lucitanian soldier
+*/
+
+
+/////////////////////////////////////////////////// END CORPS SECTION
+
+/*QUAKED point_combat (0.5 0.3 0) (-8 -8 -8) (8 8 8) Teleport Hold
+Makes this the target of a monster and it will head here when first activated before going after the activator.  If hold is selected, it will stay here.
+
+"moodname" Changes the mood of an entity that touches this point_combat
+-wandering (default)
+-guarding  (Set guard radius with "guard_distance")
+-fleeing
+-standing
+-waiting
+-dormant
+-patrolling
+-mission
+-critical mission
+-running
+-dead
+Refer "moods.doc" for behaviour.
+
+"moodtime" sets the how long (in secs) the mood will last.
+"lastmoodname" - Theoretically the mood the touching entity were in "previously"
+"lastmoodtime" - How much time was supposedly left on touching entity's previous mood (0 for forever)
+
+"alert_mood" - In which mood touching entity goes when it gets alerted. (Doesn't have any effect if entity is already alerted)
+"alert_time" - How many seconds touching entity stays in alert_mood, after that it goes to the previous mood (or "lastmoodname")
+
+"wait" Seconds how long entity will stop here in "standing" mood.
+
+"ideal_yaw" The angle where the monster or NPC will point when point_combat reached
+
+"Pathtarget" gets used when an entity that has this point_combat targeted touches it.
+	(when the monster triggers the other guys, it alerts them to an enemy he saw, rather than himself)
+"killtarget" kills a target
+
+"combattarget"
+"sight_range"
+"fleetarget"
+"alert_target"
+"datafile"
+*/
+
+/*QUAKED viewthing (0 .5 .8) (-8 -8 -8) (8 8 8)
+Just for the debugging level.  Don't use.
+*/
+
+/*QUAKED path_corner (.5 .3 0) (-8 -8 -8) (8 8 8) TELEPORT
+"target" next path corner
+
+"moodname" Changes the mood of an entity that touches this path_corner
+-wandering (default)
+-guarding  (Set guard radius with "guard_distance")
+-fleeing
+-standing
+-waiting
+-dormant
+-patrolling
+-mission
+-critical mission
+-running
+-dead
+Refer "moods.doc" for behaviour.
+
+"moodtime" sets the how long (in secs) the mood will last.
+"lastmoodname" - Theoretically the mood the touching entity were in "previously"
+"lastmoodtime" - How much time was supposedly left on touching entity's previous mood (0 for forever)
+
+"alert_mood" - In which mood touching entity goes when it gets alerted. (Doesn't have any effect if entity is already alerted)
+"alert_time" - How many seconds touching entity stays in alert_mood, after that it goes to the previous mood (or "lastmoodname")
+
+"wait" Seconds how long entity will stop here in "standing" mood.
+
+"ideal_yaw" The angle where the monster or NPC will point when point_combat reached
+
+"Pathtarget" gets used when an entity that has this point_combat targeted touches it.
+	(when the monster triggers the other guys, it alerts them to an enemy he saw, rather than himself)
+"killtarget" kills a target
+
+"combattarget"
+"sight_range"
+"fleetarget"
+"alert_target"
+"datafile"
+*/
+
+/*QUAKED point_flee (.5 .3 0) (-8 -8 -8) (8 8 8) TELEPORT
+"target" next path corner
+
+"moodname" Changes the mood of an entity that touches this point_flee
+-wandering (default)
+-guarding  (Set guard radius with "guard_distance")
+-fleeing
+-standing
+-waiting
+-dormant
+-patrolling
+-mission
+-critical mission
+-running
+-dead
+Refer "moods.doc" for behaviour.
+
+"moodtime" sets the how long (in secs) the mood will last.
+"lastmoodname" - Theoretically the mood the touching entity were in "previously"
+"lastmoodtime" - How much time was supposedly left on touching entity's previous mood (0 for forever)
+
+"alert_mood" - In which mood touching entity goes when it gets alerted. (Doesn't have any effect if entity is already alerted)
+"alert_time" - How many seconds touching entity stays in alert_mood, after that it goes to the previous mood (or "lastmoodname")
+
+"wait" Seconds how long entity will stop here in "standing" mood.
+
+"ideal_yaw" The angle where the monster or NPC will point when point_combat reached
+
+"Pathtarget" gets used when an entity that has this point_combat targeted touches it.
+	(when the monster triggers the other guys, it alerts them to an enemy he saw, rather than himself)
+"killtarget" kills a target
+
+"combattarget"
+"sight_range"
+"fleetarget"
+"alert_target"
+"datafile"
+*/
+
+/*QUAKED worldspawn (0 0 0) ?
+only used for the world
+"sky" environment map name (unit1_ unit2_ unit3_ etc... space1)
+"skyaxis" vector axis for rotating sky (eg. 0 0 1)
+"skyrotate" speed of rotation in degrees/second
+"sounds" music cd track number
+"gravity" 800 is default gravity
+"message" text to print at user logon
+"light" Set ambient brightness (Can use RGB value)
+"_ambient" Same as 'light'
+"_sun_light" Set sun brightness
+"_sun" Set sun's target (Sun angle = spotlight pointing to target)
+"_sun_target" Same as '_sun'
+"_sun_angle" Set sun agle by yaw/pitch (_sun_angle 90 15)
+"_sun_mangle" Same as '_sun_angle'
+"_sun_vector" Set sun angle by direction vector
+"_sun_color" Set sun color
+"_sun_diffuse" Diffuse light brightness
+"_sun_difwait" Diffuse light attenuation
+"_sun_diffade" Same as 'sun_difwait'
+"_sun_ambient" Set sun ambient brightness. RGB can be used.
+(All the above sun keys can pe prefixed by either _sun, _sun2, _sun3, or _sun4)
+*/
