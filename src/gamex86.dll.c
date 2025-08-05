@@ -3,10 +3,10 @@
 // Website: https://retdec.com
 //
 
-#include <math.h>
 #include <stdbool.h>
 #include <stdint.h>
-#include <stdlib.h>
+#include "q_shared.h"
+#include "game.h"
 #ifdef _WIN32
 #include <windows.h>
 #include <sys/types.h>
@@ -1819,7 +1819,6 @@ int32_t function_20062d00(int32_t a1, int32_t a2);
 int32_t function_20062e38(int32_t a1, int32_t a2);
 int32_t function_20062ed6(int32_t result);
 int32_t function_224d89b7(void);
-int32_t GetGameAPI(int32_t a1);
 
 // --------------------- Global Variables ---------------------
 
@@ -19780,10 +19779,12 @@ int32_t function_20018400(void) {
 }
 
 // Address range: 0x20018443 - 0x2001850a
-int32_t GetGameAPI(int32_t a1) {
+game_export_t *
+GetGameApi(game_import_t *import)
+{
 	// 0x20018443
-	__asm_rep_movsd_memcpy((char *)&g778, (char *)a1, 44);
-	g747 = 3;
+	__asm_rep_movsd_memcpy((char *)&g778, (char *)import, 44);
+	g747 = GAME_API_VERSION;
 	g748 = &g10;
 	g749 = 0x20018400;
 	g750 = 0x2002544c;
