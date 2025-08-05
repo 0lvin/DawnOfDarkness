@@ -7,7 +7,15 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdlib.h>
+#ifdef _WIN32
 #include <windows.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <errno.h>
+#else
+#include <sys/stat.h>
+#include <errno.h>
+#endif
 
 // ---------------- Integer Types Definitions -----------------
 
@@ -368,7 +376,7 @@ int32_t function_200149fe(int32_t result2, int32_t result3);
 int32_t function_20014b70(int32_t a1);
 int32_t function_20014ba0(int32_t a1);
 int32_t function_20014bc5(int32_t a1);
-int32_t function_20014c37(int32_t a1);
+int32_t FindItem(const char *name);
 int32_t function_20014cab(int32_t a1);
 int32_t function_20014d6c(int32_t result, int32_t a2);
 int32_t function_20014dd7(int32_t a1, int32_t a2, int32_t a3);
@@ -4787,12 +4795,12 @@ int32_t function_20004861(int32_t result) {
 					if (v23 != 0) {
 						// 0x20004b90
 						*v20 = v9;
-						int32_t v24 = function_20014c37((int32_t)&g940); // 0x20004b94
+						int32_t v24 = FindItem((int32_t)&g940); // 0x20004b94
 						int32_t result3 = v24; // 0x20004ba3
 						if (v24 == 0) {
 							// 0x20004ba5
 							*v20 = v24;
-							int32_t result2 = function_20014c37(v24); // 0x20004bb7
+							int32_t result2 = FindItem(v24); // 0x20004bb7
 							result3 = result2;
 							if (result2 == 0) {
 								// 0x20004bc8
@@ -5144,7 +5152,7 @@ int32_t function_20004db3(int32_t result) {
 int32_t function_20004e38(int32_t a1) {
 	// 0x20004e38
 	int32_t v1; // 0x20004e38
-	int32_t result = function_20014c37(v1); // 0x20004e4b
+	int32_t result = FindItem(v1); // 0x20004e4b
 	if (result == 0 || *(int32_t *)(result + 8) == 0) {
 		// 0x20004ee3
 		return result;
@@ -5158,7 +5166,7 @@ int32_t function_20004e38(int32_t a1) {
 int32_t function_20004ee7(int32_t a1) {
 	// 0x20004ee7
 	int32_t v1; // 0x20004ee7
-	int32_t result = function_20014c37(v1); // 0x20004efa
+	int32_t result = FindItem(v1); // 0x20004efa
 	if (result == 0 || *(int32_t *)(result + 12) == 0) {
 		// 0x20004f92
 		return result;
@@ -5241,7 +5249,7 @@ int32_t function_200050db(int32_t result) {
 	if (function_200580ba(*v6, "Bow") == 0) {
 		// 0x2000513b
 		if (*(int32_t *)(v1 + 1296) != 0) {
-			int32_t v7 = function_20014c37((int32_t)"Arrows"); // 0x2000514c
+			int32_t v7 = FindItem("Arrows"); // 0x2000514c
 			int32_t v8 = v7 - (int32_t)&g61; // 0x2000515a
 			int32_t v9 = *(int32_t *)(result + 980 + 4 * (int32_t)((0x100000000 * (int64_t)(v8 >> 31) | (int64_t)v8) / 104)); // 0x2000516a
 			if (v9 != 0) {
@@ -5254,7 +5262,7 @@ int32_t function_200050db(int32_t result) {
 	if (function_200580ba(*v6, "Crossbow") == 0) {
 		// 0x200051a1
 		if (*(int32_t *)(v1 + 1292) != 0) {
-			int32_t v10 = function_20014c37((int32_t)"Bolts"); // 0x200051b2
+			int32_t v10 = FindItem("Bolts"); // 0x200051b2
 			int32_t v11 = v10 - (int32_t)&g61; // 0x200051c0
 			int32_t v12 = *(int32_t *)(result + 980 + 4 * (int32_t)((0x100000000 * (int64_t)(v11 >> 31) | (int64_t)v11) / 104)); // 0x200051d0
 			if (v12 != 0) {
@@ -5353,7 +5361,7 @@ int32_t function_200050db(int32_t result) {
 	if (v32 == 0) {
 		// 0x200052aa
 		*v16 = (int32_t)"Flaming arrows";
-		int32_t v34 = function_20014c37((int32_t)&g940); // 0x200052af
+		int32_t v34 = FindItem((int32_t)&g940); // 0x200052af
 		v13 = 1;
 		v33 = v34;
 	}
@@ -5374,7 +5382,7 @@ int32_t function_200050db(int32_t result) {
 	} else {
 		// 0x200052f0
 		*v16 = (int32_t)"Explosive bolts";
-		int32_t v38 = function_20014c37((int32_t)&g940); // 0x200052de
+		int32_t v38 = FindItem((int32_t)&g940); // 0x200052de
 		v13 = 1;
 		v36 = v38;
 		goto lab_0x200052f6;
@@ -5416,7 +5424,7 @@ int32_t function_2000533d(int32_t result) {
 	if (function_200580ba(*v6, "Bow") == 0) {
 		// 0x2000539d
 		if (*(int32_t *)(v1 + 1296) == 0) {
-			int32_t v7 = function_20014c37((int32_t)"Flaming arrows"); // 0x200053ae
+			int32_t v7 = FindItem("Flaming arrows"); // 0x200053ae
 			int32_t v8 = v7 - (int32_t)&g61; // 0x200053bc
 			int32_t v9 = *(int32_t *)(result + 980 + 4 * (int32_t)((0x100000000 * (int64_t)(v8 >> 31) | (int64_t)v8) / 104)); // 0x200053cc
 			if (v9 != 0) {
@@ -5429,7 +5437,7 @@ int32_t function_2000533d(int32_t result) {
 	if (function_200580ba(*v6, "Crossbow") == 0) {
 		// 0x20005403
 		if (*(int32_t *)(v1 + 1292) == 0) {
-			int32_t v10 = function_20014c37((int32_t)"Explosive bolts"); // 0x20005414
+			int32_t v10 = FindItem("Explosive bolts"); // 0x20005414
 			int32_t v11 = v10 - (int32_t)&g61; // 0x20005422
 			int32_t v12 = *(int32_t *)(result + 980 + 4 * (int32_t)((0x100000000 * (int64_t)(v11 >> 31) | (int64_t)v11) / 104)); // 0x20005432
 			if (v12 != 0) {
@@ -5528,7 +5536,7 @@ int32_t function_2000533d(int32_t result) {
 	if (v32 == 0) {
 		// 0x20005511
 		*v16 = (int32_t)"Arrows";
-		int32_t v34 = function_20014c37((int32_t)&g940); // 0x20005516
+		int32_t v34 = FindItem((int32_t)&g940); // 0x20005516
 		v13 = 1;
 		v33 = v34;
 	}
@@ -5549,7 +5557,7 @@ int32_t function_2000533d(int32_t result) {
 	} else {
 		// 0x20005557
 		*v16 = (int32_t)"Bolts";
-		int32_t v38 = function_20014c37((int32_t)&g940); // 0x20005545
+		int32_t v38 = FindItem((int32_t)&g940); // 0x20005545
 		v13 = 1;
 		v36 = v38;
 		goto lab_0x2000555d;
@@ -5871,10 +5879,10 @@ int32_t function_20005ba4(int32_t result, int32_t a2) {
 
 // Address range: 0x20005cfe - 0x20005ec6
 int32_t function_20005cfe(int32_t result) {
-	int32_t v1 = function_20014c37((int32_t)"bottle"); // 0x20005d09
-	int32_t v2 = function_20014c37((int32_t)"bread"); // 0x20005d19
-	int32_t v3 = function_20014c37((int32_t)"health"); // 0x20005d29
-	int32_t v4 = function_20014c37((int32_t)"Rejuvenation"); // 0x20005d39
+	int32_t v1 = FindItem("bottle"); // 0x20005d09
+	int32_t v2 = FindItem("bread"); // 0x20005d19
+	int32_t v3 = FindItem("health"); // 0x20005d29
+	int32_t v4 = FindItem("Rejuvenation"); // 0x20005d39
 	int32_t v5 = 1; // bp-28, 0x20005d44
 	int32_t * v6 = (int32_t *)(result + 472); // 0x20005d51
 	int32_t * v7 = (int32_t *)(result + 476); // 0x20005d57
@@ -7220,7 +7228,7 @@ int32_t function_20007f45(int32_t result, int32_t a2) {
 		// 0x20007f8f
 		v5 = 0;
 		if ((*(int32_t *)(result + 184) & 4) == 0) {
-			int32_t v6 = function_20014c37(*(int32_t *)(v4 + 16)); // 0x20007fa6
+			int32_t v6 = FindItem(*(int32_t *)(v4 + 16)); // 0x20007fa6
 			int32_t v7 = v6 - (int32_t)&g61; // 0x20007fae
 			v5 = (0x100000000 * (int64_t)(v7 >> 31) | (int64_t)v7) / 104;
 		}
@@ -8486,7 +8494,7 @@ int32_t function_200091c0(int32_t a1) {
 		// 0x20009605
 		return 0;
 	}
-	int32_t v18 = function_20014c37((int32_t)"Cannon balls"); // 0x20009543
+	int32_t v18 = FindItem("Cannon balls"); // 0x20009543
 	int32_t v19 = v18 - (int32_t)&g61; // 0x2000954b
 	int32_t v20 = *(int32_t *)(a1 + 980 + 4 * (int32_t)((0x100000000 * (int64_t)(v19 >> 31) | (int64_t)v19) / 104)); // 0x2000955b
 	if (v20 == 0) {
@@ -8495,7 +8503,7 @@ int32_t function_200091c0(int32_t a1) {
 	} else {
 		// 0x20009565
 		*(int32_t *)(v2 + 256) = a1;
-		*(int32_t *)(*v3 + 2536) = function_20014c37((int32_t)"Cannon balls");
+		*(int32_t *)(*v3 + 2536) = FindItem("Cannon balls");
 	}
 	// 0x20009605
 	return 0;
@@ -16779,7 +16787,7 @@ int32_t function_2001402f(int32_t result) {
 			function_2000d397(*v1, 0, 0x3f666666, v6);
 		}
 	} else {
-		int32_t v7 = function_20014c37((int32_t)"Shovel"); // 0x200140b5
+		int32_t v7 = FindItem("Shovel"); // 0x200140b5
 		int32_t v8 = v7 - (int32_t)&g61; // 0x200140bd
 		uint32_t v9 = (int32_t)((0x100000000 * (int64_t)(v8 >> 31) | (int64_t)v8) / 104); // 0x200140c8
 		if (v9 >= 1) {
@@ -17471,7 +17479,7 @@ int32_t function_20014bc5(int32_t a1) {
 }
 
 // Address range: 0x20014c37 - 0x20014cab
-int32_t function_20014c37(int32_t a1) {
+int32_t FindItem(const char *name) {
 	// 0x20014c37
 	int32_t v1; // bp-12, 0x20014c37
 	int32_t v2 = &v1; // 0x20014c3a
@@ -17797,7 +17805,7 @@ int32_t function_20015480(int32_t a1, int32_t a2) {
 			int32_t v9 = *(int32_t *)(function_20007153(*v8) + 16); // 0x20015505
 			v5 = v7;
 			v6 = 0;
-			if (function_20014c37(v9) == a2) {
+			if (FindItem(v9) == a2) {
 				// 0x20015516
 				*v8 = 0;
 				v5 = v7;
@@ -17831,10 +17839,10 @@ int32_t function_20015561(int32_t result, int32_t a2) {
 	int32_t v3; // 0x20015561
 	if (v2 <= 1) {
 		// 0x200155a6
-		v3 = function_20014c37((int32_t)"Crossbow");
+		v3 = FindItem("Crossbow");
 	} else {
 		// 0x20015594
-		v3 = function_20014c37((int32_t)"Bow");
+		v3 = FindItem("Bow");
 	}
 	int32_t v4 = v3 - (int32_t)&g61; // 0x200155b9
 	int32_t v5 = *(int32_t *)(result + 980 + 4 * (int32_t)((0x100000000 * (int64_t)(v4 >> 31) | (int64_t)v4) / 104)); // 0x200155c9
@@ -17911,7 +17919,7 @@ int32_t function_20015561(int32_t result, int32_t a2) {
 					*(int32_t *)(v16 + 88) = v16;
 				}
 			}
-			int32_t v18 = function_20014c37((int32_t)"Explosive bolts"); // 0x20015709
+			int32_t v18 = FindItem("Explosive bolts"); // 0x20015709
 			int32_t v19 = v18 - (int32_t)&g61; // 0x20015711
 			int32_t result3 = (0x100000000 * (int64_t)(v19 >> 31) | (int64_t)v19) / 104; // 0x2001571c
 			*(int32_t *)(*v8 + 2512) = result3;
@@ -17928,7 +17936,7 @@ int32_t function_20015561(int32_t result, int32_t a2) {
 				v20 = *v8;
 			}
 		}
-		int32_t v21 = function_20014c37(*(int32_t *)(*(int32_t *)(v20 + 1300) + 60)); // 0x2001577c
+		int32_t v21 = FindItem(*(int32_t *)(*(int32_t *)(v20 + 1300) + 60)); // 0x2001577c
 		int32_t v22 = v21 - (int32_t)&g61; // 0x20015784
 		int32_t result4 = (0x100000000 * (int64_t)(v22 >> 31) | (int64_t)v22) / 104; // 0x2001578f
 		*(int32_t *)(*v8 + 2512) = result4;
@@ -17953,7 +17961,7 @@ int32_t function_20015561(int32_t result, int32_t a2) {
 				*(int32_t *)(v23 + 88) = v23;
 			}
 		}
-		int32_t v25 = function_20014c37((int32_t)"Flaming arrows"); // 0x20015812
+		int32_t v25 = FindItem("Flaming arrows"); // 0x20015812
 		int32_t v26 = v25 - (int32_t)&g61; // 0x2001581a
 		int32_t result5 = (0x100000000 * (int64_t)(v26 >> 31) | (int64_t)v26) / 104; // 0x20015825
 		*(int32_t *)(*v8 + 2512) = result5;
@@ -17970,7 +17978,7 @@ int32_t function_20015561(int32_t result, int32_t a2) {
 			v27 = *v8;
 		}
 	}
-	int32_t v28 = function_20014c37(*(int32_t *)(*(int32_t *)(v27 + 1300) + 60)); // 0x20015885
+	int32_t v28 = FindItem(*(int32_t *)(*(int32_t *)(v27 + 1300) + 60)); // 0x20015885
 	int32_t v29 = v28 - (int32_t)&g61; // 0x2001588d
 	int32_t result6 = (0x100000000 * (int64_t)(v29 >> 31) | (int64_t)v29) / 104; // 0x20015898
 	*(int32_t *)(*v8 + 2512) = result6;
@@ -18092,7 +18100,7 @@ int32_t function_20015b5e(int32_t a1, int32_t a2) {
 		// 0x20015e3c
 		return &v8;
 	}
-	int32_t v10 = function_20014c37((int32_t)"Purified water"); // 0x20015c68
+	int32_t v10 = FindItem("Purified water"); // 0x20015c68
 	int32_t v11 = v10 - (int32_t)&g61; // 0x20015c70
 	int32_t v12 = *v1; // 0x20015c80
 	*(int32_t *)(v12 + 0xde9cc) = (int32_t)((0x100000000 * (int64_t)(v11 >> 31) | (int64_t)v11) / 104);
@@ -18596,7 +18604,7 @@ int32_t function_200169a5(int32_t a1) {
 		if (*(char *)v4 != 0) {
 			int32_t * v6 = (int32_t *)(v2 - 4); // 0x20016a36
 			*v6 = v4;
-			int32_t v7 = function_20014c37(v5); // 0x20016a37
+			int32_t v7 = FindItem(v5); // 0x20016a37
 			if (v7 != a1) {
 				// 0x20016a4a
 				*v6 = v7;
@@ -29554,7 +29562,7 @@ int32_t function_20025741(int32_t a1) {
 	int32_t v3 = g787; // 0x2002594a
 	g776 = v3 != 0 ? v3 : v2;
 	int32_t v4 = v3 != 0 ? (int32_t)"sv_gravity" : (int32_t)"sv_gravity"; // 0x20025994
-	int32_t result = function_200169a5(function_20014c37(v4)); // 0x2002599d
+	int32_t result = function_200169a5(FindItem(v4)); // 0x2002599d
 	g826 = result;
 	return result;
 }
@@ -35232,27 +35240,27 @@ int32_t function_2002cc91(int32_t result, int32_t a2, int32_t * a3, int32_t a4, 
 	switch (a5) {
 		case 0: {
 			// 0x2002ce42
-			*(int32_t *)(v2 + 644) = function_20014c37((int32_t)"Bolts");
+			*(int32_t *)(v2 + 644) = FindItem("Bolts");
 			*(int32_t *)(v2 + 412) = 0x40000000;
 			// break -> 0x2002cec8
 			break;
 		}
 		case 1: {
 			// 0x2002ce67
-			*(int32_t *)(v2 + 644) = function_20014c37((int32_t)"Explosive bolts");
+			*(int32_t *)(v2 + 644) = FindItem("Explosive bolts");
 			*(int32_t *)(v2 + 412) = 0x40000000;
 			// break -> 0x2002cec8
 			break;
 		}
 		case 2: {
 			// 0x2002ceb2
-			*(int32_t *)(v2 + 644) = function_20014c37((int32_t)"Arrows");
+			*(int32_t *)(v2 + 644) = FindItem("Arrows");
 			// break -> 0x2002cec8
 			break;
 		}
 		case 3: {
 			// 0x2002ce8c
-			*(int32_t *)(v2 + 644) = function_20014c37((int32_t)"Flaming arrows");
+			*(int32_t *)(v2 + 644) = FindItem("Flaming arrows");
 			int32_t * v12 = (int32_t *)(v2 + 64); // 0x2002cea5
 			*v12 = *v12 | 16;
 			// break -> 0x2002cec8
@@ -55529,7 +55537,7 @@ int32_t function_2004a24b(int32_t result2, int32_t a2, int32_t a3, int32_t a4) {
 int32_t function_2004a507(int32_t a1, int32_t result) {
 	// 0x2004a507
 	function_20058d40((int32_t *)(result + 188), 0, 1132);
-	int32_t v1 = function_20014c37((int32_t)"Dagger"); // 0x2004a52a
+	int32_t v1 = FindItem("Dagger"); // 0x2004a52a
 	int32_t v2 = v1 - (int32_t)&g61; // 0x2004a538
 	*(int32_t *)(result + 748 + 4 * (int32_t)((0x100000000 * (int64_t)(v2 >> 31) | (int64_t)v2) / 104)) = 1;
 	*(float32_t *)(a1 + 1496) = (float32_t)(float80_t)function_2000716d("Dagger");
@@ -57928,7 +57936,7 @@ int32_t function_2004d46c(int32_t a1) {
 		int32_t * v25 = (int32_t *)((int32_t)&v24 - 4); // 0x2004d68a
 		*v25 = v23;
 		*v25 = *(int32_t *)(function_20007153((int32_t)v18) + 16);
-		int32_t v26 = function_20014c37((int32_t)&g940); // 0x2004d69d
+		int32_t v26 = FindItem((int32_t)&g940); // 0x2004d69d
 		*v25 = *(int32_t *)(v26 + 40);
 		*(int16_t *)(*v1 + 128) = (int16_t)v26;
 		int32_t v27 = v26 - (int32_t)&g61; // 0x2004d6c8
@@ -58518,7 +58526,7 @@ int32_t function_2004e4a7(int32_t a1, int32_t a2) {
 		// 0x2004e51a
 		return function_2004e432(a1, 0, a2);
 	}
-	int32_t v1 = function_20014c37((int32_t)"Torch"); // 0x2004e4d2
+	int32_t v1 = FindItem("Torch"); // 0x2004e4d2
 	int32_t v2 = v1 - (int32_t)&g61; // 0x2004e4da
 	int32_t v3 = *(int32_t *)(a1 + 980 + 4 * (int32_t)((0x100000000 * (int64_t)(v2 >> 31) | (int64_t)v2) / 104)); // 0x2004e4ea
 	int32_t result = a1; // 0x2004e4f2
@@ -58635,7 +58643,7 @@ int32_t function_2004e51c(int32_t a1) {
 	// 0x2004e7e8
 	*(int32_t *)v8 = 0;
 	int32_t v32 = *v1; // 0x2004e7fb
-	int32_t v33 = function_20014c37((int32_t)"Torch"); // 0x2004e806
+	int32_t v33 = FindItem("Torch"); // 0x2004e806
 	int32_t v34 = v33 - (int32_t)&g61; // 0x2004e80e
 	int32_t * v35 = (int32_t *)(v32 + 980 + 4 * (int32_t)((0x100000000 * (int64_t)(v34 >> 31) | (int64_t)v34) / 104)); // 0x2004e82e
 	*v35 = *v35 - 1;
@@ -61140,7 +61148,7 @@ int32_t function_200515ca(int32_t a1, int32_t a2) {
 	if ((*v9 & 0x10000) == 0) {
 		int32_t v10 = *(int32_t *)(*v1 + 60); // 0x20051664
 		if (v10 != 0) {
-			int32_t v11 = function_20014c37(v10); // 0x2005167b
+			int32_t v11 = FindItem(v10); // 0x2005167b
 			__frontend_reg_store_fpr(v4 - 2, (float80_t)*(float32_t *)(g825 + 20));
 			if ((__ftol() & 0x2000) == 0) {
 				// 0x200516b4
@@ -61250,7 +61258,7 @@ int32_t function_200517d5(int32_t a1) {
 				if (*(int32_t *)(result + 1292) == 0) {
 					goto lab_0x200518df;
 				} else {
-					int32_t v10 = function_20014c37((int32_t)"Explosive bolts"); // 0x200518bf
+					int32_t v10 = FindItem("Explosive bolts"); // 0x200518bf
 					int32_t v11 = v10 - (int32_t)&g61; // 0x200518c7
 					*(int32_t *)(result + 2512) = (int32_t)((0x100000000 * (int64_t)(v11 >> 31) | (int64_t)v11) / 104);
 					goto lab_0x20051963;
@@ -61323,14 +61331,14 @@ int32_t function_200517d5(int32_t a1) {
 		if (*(int32_t *)(*v1 + 1296) == 0) {
 			goto lab_0x20051929;
 		} else {
-			int32_t v17 = function_20014c37((int32_t)"Flaming arrows"); // 0x20051909
+			int32_t v17 = FindItem("Flaming arrows"); // 0x20051909
 			int32_t v18 = v17 - (int32_t)&g61; // 0x20051911
 			*(int32_t *)(result + 2512) = (int32_t)((0x100000000 * (int64_t)(v18 >> 31) | (int64_t)v18) / 104);
 			goto lab_0x20051963;
 		}
 	}
   lab_0x20051929:;
-	int32_t v19 = function_20014c37(v8); // 0x20051936
+	int32_t v19 = FindItem(v8); // 0x20051936
 	int32_t v20 = v19 - (int32_t)&g61; // 0x2005193e
 	*(int32_t *)(result + 2512) = (int32_t)((0x100000000 * (int64_t)(v20 >> 31) | (int64_t)v20) / 104);
 	goto lab_0x20051963;
@@ -61350,46 +61358,46 @@ int32_t function_20051aa4(int32_t a1) {
 		__frontend_reg_store_fpr(v2, __frontend_reg_load_fpr(v2) + 1.0L);
 		*(float32_t *)(a1 + 464) = (float32_t)__frontend_reg_load_fpr(v1);
 	}
-	int32_t v4 = function_20014c37((int32_t)"Ball cartridge"); // 0x20051b04
+	int32_t v4 = FindItem("Ball cartridge"); // 0x20051b04
 	int32_t v5 = v4 - (int32_t)&g61; // 0x20051b0c
 	int32_t v6 = a1 + 980; // 0x20051b1c
 	int32_t v7 = *(int32_t *)(4 * (int32_t)((0x100000000 * (int64_t)(v5 >> 31) | (int64_t)v5) / 104) + v6); // 0x20051b1c
 	if (v7 != 0) {
-		int32_t v8 = function_20014c37((int32_t)"Blunderbuss"); // 0x20051b2b
+		int32_t v8 = FindItem("Blunderbuss"); // 0x20051b2b
 		int32_t v9 = v8 - (int32_t)&g61; // 0x20051b33
 		int32_t v10 = *(int32_t *)(4 * (int32_t)((0x100000000 * (int64_t)(v9 >> 31) | (int64_t)v9) / 104) + v6); // 0x20051b43
 		if (v10 != 0) {
-			int32_t result = function_20014c37((int32_t)"Blunderbuss"); // 0x20051b52
+			int32_t result = FindItem("Blunderbuss"); // 0x20051b52
 			*(int32_t *)(*(int32_t *)(a1 + 84) + 2536) = result;
 			// 0x20051e66
 			return result;
 		}
 	}
-	int32_t v11 = function_20014c37((int32_t)"Pellets"); // 0x20051b70
+	int32_t v11 = FindItem("Pellets"); // 0x20051b70
 	int32_t v12 = v11 - (int32_t)&g61; // 0x20051b78
 	uint32_t v13 = *(int32_t *)(4 * (int32_t)((0x100000000 * (int64_t)(v12 >> 31) | (int64_t)v12) / 104) + v6); // 0x20051b88
 	if (v13 >= 1) {
-		int32_t v14 = function_20014c37((int32_t)"Triple Flintlock"); // 0x20051b97
+		int32_t v14 = FindItem("Triple Flintlock"); // 0x20051b97
 		int32_t v15 = v14 - (int32_t)&g61; // 0x20051b9f
 		int32_t v16 = *(int32_t *)(4 * (int32_t)((0x100000000 * (int64_t)(v15 >> 31) | (int64_t)v15) / 104) + v6); // 0x20051baf
 		if (v16 != 0) {
-			int32_t result2 = function_20014c37((int32_t)"Triple Flintlock"); // 0x20051bbe
+			int32_t result2 = FindItem("Triple Flintlock"); // 0x20051bbe
 			*(int32_t *)(*(int32_t *)(a1 + 84) + 2536) = result2;
 			// 0x20051e66
 			return result2;
 		}
 	}
-	int32_t v17 = function_20014c37((int32_t)"Crossbow"); // 0x20051bdc
+	int32_t v17 = FindItem("Crossbow"); // 0x20051bdc
 	int32_t v18 = v17 - (int32_t)&g61; // 0x20051be4
 	int32_t v19 = *(int32_t *)(4 * (int32_t)((0x100000000 * (int64_t)(v18 >> 31) | (int64_t)v18) / 104) + v6); // 0x20051bf4
 	int32_t result3; // 0x20051aa4
 	if (v19 != 0) {
-		int32_t v20 = function_20014c37((int32_t)"Explosive bolts"); // 0x20051c15
+		int32_t v20 = FindItem("Explosive bolts"); // 0x20051c15
 		int32_t v21 = v20 - (int32_t)&g61; // 0x20051c1d
 		int32_t v22 = *(int32_t *)(4 * (int32_t)((0x100000000 * (int64_t)(v21 >> 31) | (int64_t)v21) / 104) + v6); // 0x20051c2d
 		if (v22 != 0) {
 			// 0x20051c7a
-			function_20014c37((int32_t)"Crossbow");
+			FindItem("Crossbow");
 			int32_t v23 = *(int32_t *)(a1 + 84); // 0x20051c8d
 			if (*(int32_t *)(v23 + 1300) == 0) {
 				// 0x20051cdd
@@ -61397,33 +61405,33 @@ int32_t function_20051aa4(int32_t a1) {
 				result3 = v23;
 			} else {
 				// 0x20051cc1
-				result3 = function_20015561(a1, function_20014c37((int32_t)"Explosive bolts"));
+				result3 = function_20015561(a1, FindItem("Explosive bolts"));
 			}
 			// 0x20051e66
 			return result3;
 		}
 		// 0x20051c40
-		function_20014c37((int32_t)"Bolts");
+		FindItem("Bolts");
 	}
-	int32_t v24 = function_20014c37((int32_t)"Ancestral Sword"); // 0x20051cf6
+	int32_t v24 = FindItem("Ancestral Sword"); // 0x20051cf6
 	int32_t v25 = v24 - (int32_t)&g61; // 0x20051cfe
 	int32_t v26 = *(int32_t *)(4 * (int32_t)((0x100000000 * (int64_t)(v25 >> 31) | (int64_t)v25) / 104) + v6); // 0x20051d0e
 	if (v26 != 0) {
-		int32_t result4 = function_20014c37((int32_t)"Ancestral Sword"); // 0x20051d1d
+		int32_t result4 = FindItem("Ancestral Sword"); // 0x20051d1d
 		*(int32_t *)(*(int32_t *)(a1 + 84) + 2536) = result4;
 		// 0x20051e66
 		return result4;
 	}
-	int32_t v27 = function_20014c37((int32_t)"Bow"); // 0x20051d3b
+	int32_t v27 = FindItem("Bow"); // 0x20051d3b
 	int32_t v28 = v27 - (int32_t)&g61; // 0x20051d43
 	int32_t v29 = *(int32_t *)(4 * (int32_t)((0x100000000 * (int64_t)(v28 >> 31) | (int64_t)v28) / 104) + v6); // 0x20051d53
 	if (v29 != 0) {
-		int32_t v30 = function_20014c37((int32_t)"Flaming arrows"); // 0x20051d74
+		int32_t v30 = FindItem("Flaming arrows"); // 0x20051d74
 		int32_t v31 = v30 - (int32_t)&g61; // 0x20051d7c
 		int32_t v32 = *(int32_t *)(4 * (int32_t)((0x100000000 * (int64_t)(v31 >> 31) | (int64_t)v31) / 104) + v6); // 0x20051d8c
 		if (v32 != 0) {
 			// 0x20051dd9
-			function_20014c37((int32_t)"Bow");
+			FindItem("Bow");
 			int32_t v33 = *(int32_t *)(a1 + 84); // 0x20051dec
 			if (*(int32_t *)(v33 + 1300) == 0) {
 				// 0x20051e3c
@@ -61431,15 +61439,15 @@ int32_t function_20051aa4(int32_t a1) {
 				result3 = v33;
 			} else {
 				// 0x20051e20
-				result3 = function_20015561(a1, function_20014c37((int32_t)"Flaming arrows"));
+				result3 = function_20015561(a1, FindItem("Flaming arrows"));
 			}
 			// 0x20051e66
 			return result3;
 		}
 		// 0x20051d9f
-		function_20014c37((int32_t)"Arrows");
+		FindItem("Arrows");
 	}
-	int32_t result5 = function_20014c37((int32_t)"Dagger"); // 0x20051e52
+	int32_t result5 = FindItem("Dagger"); // 0x20051e52
 	*(int32_t *)(*(int32_t *)(a1 + 84) + 2536) = result5;
 	// 0x20051e66
 	return result5;
@@ -61501,7 +61509,7 @@ int32_t function_20051ece(int32_t result2, int32_t a2) {
 			if ((v10 & 2) == 0) {
 				if ((v10 & 0x1000) == 0) {
 					if ((v10 & 2048) == 0) {
-						int32_t v11 = function_20014c37(*v5); // 0x200522a2
+						int32_t v11 = FindItem(*v5); // 0x200522a2
 						int32_t v12 = v11 - (int32_t)&g61; // 0x200522aa
 						int32_t v13 = (0x100000000 * (int64_t)(v12 >> 31) | (int64_t)v12) / 104; // 0x200522b5
 						v6 = v13;
@@ -61514,14 +61522,14 @@ int32_t function_20051ece(int32_t result2, int32_t a2) {
 					} else {
 						// 0x20052141
 						if (*(int32_t *)(*v1 + 1296) == 0) {
-							int32_t v15 = function_20014c37((int32_t)"Arrows"); // 0x200521fe
+							int32_t v15 = FindItem("Arrows"); // 0x200521fe
 							int32_t v16 = v15 - (int32_t)&g61; // 0x20052206
 							int32_t v17 = (0x100000000 * (int64_t)(v16 >> 31) | (int64_t)v16) / 104; // 0x20052211
 							v6 = v17;
 							int32_t v18 = result2 + 980; // 0x2005221c
 							int32_t v19 = *(int32_t *)(4 * v17 + v18); // 0x2005221c
 							if (v19 >= 0 != v19 != 0) {
-								int32_t v20 = function_20014c37((int32_t)"Flaming arrows"); // 0x2005222b
+								int32_t v20 = FindItem("Flaming arrows"); // 0x2005222b
 								int32_t v21 = v20 - (int32_t)&g61; // 0x20052233
 								int32_t v22 = (0x100000000 * (int64_t)(v21 >> 31) | (int64_t)v21) / 104; // 0x2005223e
 								v6 = v22;
@@ -61533,14 +61541,14 @@ int32_t function_20051ece(int32_t result2, int32_t a2) {
 								*(int32_t *)(*v1 + 1296) = 1;
 							}
 						} else {
-							int32_t v23 = function_20014c37((int32_t)"Flaming arrows"); // 0x20052159
+							int32_t v23 = FindItem("Flaming arrows"); // 0x20052159
 							int32_t v24 = v23 - (int32_t)&g61; // 0x20052161
 							int32_t v25 = (0x100000000 * (int64_t)(v24 >> 31) | (int64_t)v24) / 104; // 0x2005216c
 							v6 = v25;
 							int32_t v26 = result2 + 980; // 0x20052177
 							int32_t v27 = *(int32_t *)(4 * v25 + v26); // 0x20052177
 							if (v27 >= 0 != v27 != 0) {
-								int32_t v28 = function_20014c37((int32_t)"Arrows"); // 0x20052186
+								int32_t v28 = FindItem("Arrows"); // 0x20052186
 								int32_t v29 = v28 - (int32_t)&g61; // 0x2005218e
 								int32_t v30 = (0x100000000 * (int64_t)(v29 >> 31) | (int64_t)v29) / 104; // 0x20052199
 								v6 = v30;
@@ -61556,14 +61564,14 @@ int32_t function_20051ece(int32_t result2, int32_t a2) {
 				} else {
 					// 0x20051fd0
 					if (*(int32_t *)(*v1 + 1292) == 0) {
-						int32_t v31 = function_20014c37((int32_t)"Bolts"); // 0x2005208d
+						int32_t v31 = FindItem("Bolts"); // 0x2005208d
 						int32_t v32 = v31 - (int32_t)&g61; // 0x20052095
 						int32_t v33 = (0x100000000 * (int64_t)(v32 >> 31) | (int64_t)v32) / 104; // 0x200520a0
 						v6 = v33;
 						int32_t v34 = result2 + 980; // 0x200520ab
 						int32_t v35 = *(int32_t *)(4 * v33 + v34); // 0x200520ab
 						if (v35 >= 0 != v35 != 0) {
-							int32_t v36 = function_20014c37((int32_t)"Explosive bolts"); // 0x200520ba
+							int32_t v36 = FindItem("Explosive bolts"); // 0x200520ba
 							int32_t v37 = v36 - (int32_t)&g61; // 0x200520c2
 							int32_t v38 = (0x100000000 * (int64_t)(v37 >> 31) | (int64_t)v37) / 104; // 0x200520cd
 							v6 = v38;
@@ -61575,14 +61583,14 @@ int32_t function_20051ece(int32_t result2, int32_t a2) {
 							*(int32_t *)(*v1 + 1292) = 1;
 						}
 					} else {
-						int32_t v39 = function_20014c37((int32_t)"Explosive bolts"); // 0x20051fe8
+						int32_t v39 = FindItem("Explosive bolts"); // 0x20051fe8
 						int32_t v40 = v39 - (int32_t)&g61; // 0x20051ff0
 						int32_t v41 = (0x100000000 * (int64_t)(v40 >> 31) | (int64_t)v40) / 104; // 0x20051ffb
 						v6 = v41;
 						int32_t v42 = result2 + 980; // 0x20052006
 						int32_t v43 = *(int32_t *)(4 * v41 + v42); // 0x20052006
 						if (v43 >= 0 != v43 != 0) {
-							int32_t v44 = function_20014c37((int32_t)"Bolts"); // 0x20052015
+							int32_t v44 = FindItem("Bolts"); // 0x20052015
 							int32_t v45 = v44 - (int32_t)&g61; // 0x2005201d
 							int32_t v46 = (0x100000000 * (int64_t)(v45 >> 31) | (int64_t)v45) / 104; // 0x20052028
 							v6 = v46;
@@ -62161,7 +62169,7 @@ int32_t function_200525c8(int32_t result10, int32_t * a2) {
 				case 4: {
 					// 0x20052915
 					*(int32_t *)(*v3 + 92) = *(int32_t *)(result11 + 100);
-					int32_t v53 = function_20014c37((int32_t)"Dagger"); // 0x2005292f
+					int32_t v53 = FindItem("Dagger"); // 0x2005292f
 					int32_t v54 = *(int32_t *)(*v3 + 1300); // 0x20052937
 					*(int32_t *)(result10 + 1500) = v54 != v53 ? 0x40000000 : 0x3f800000;
 					*(int32_t *)(*v3 + 1312) = 3;
@@ -63314,12 +63322,12 @@ int32_t function_2005478b(int32_t a1) {
 	}
 	// 0x200547c4
 	if (*(int32_t *)(result + 1292) == 0) {
-		int32_t v3 = function_20014c37((int32_t)"Explosive bolts"); // 0x20054875
+		int32_t v3 = FindItem("Explosive bolts"); // 0x20054875
 		int32_t v4 = v3 - (int32_t)&g61; // 0x2005487d
 		int32_t v5 = a1 + 980; // 0x20054893
 		int32_t v6 = *(int32_t *)(4 * (int32_t)((0x100000000 * (int64_t)(v4 >> 31) | (int64_t)v4) / 104) + v5); // 0x20054893
 		if (v6 >= 0 != v6 != 0) {
-			int32_t v7 = function_20014c37(*(int32_t *)(*(int32_t *)(result4 + 1300) + 60)); // 0x200548aa
+			int32_t v7 = FindItem(*(int32_t *)(*(int32_t *)(result4 + 1300) + 60)); // 0x200548aa
 			int32_t v8 = v7 - (int32_t)&g61; // 0x200548b2
 			int32_t v9 = *(int32_t *)(4 * (int32_t)((0x100000000 * (int64_t)(v8 >> 31) | (int64_t)v8) / 104) + v5); // 0x200548c8
 			if (v9 != 0) {
@@ -63333,12 +63341,12 @@ int32_t function_2005478b(int32_t a1) {
 		// 0x200548fa
 		*(int32_t *)(result4 + 1292) = 1;
 	} else {
-		int32_t v11 = function_20014c37(*(int32_t *)(*(int32_t *)(result + 1300) + 60)); // 0x200547e1
+		int32_t v11 = FindItem(*(int32_t *)(*(int32_t *)(result + 1300) + 60)); // 0x200547e1
 		int32_t v12 = v11 - (int32_t)&g61; // 0x200547e9
 		int32_t v13 = a1 + 980; // 0x200547ff
 		int32_t v14 = *(int32_t *)(4 * (int32_t)((0x100000000 * (int64_t)(v12 >> 31) | (int64_t)v12) / 104) + v13); // 0x200547ff
 		if (v14 >= 0 != v14 != 0) {
-			int32_t v15 = function_20014c37((int32_t)"Explosive bolts"); // 0x2005480e
+			int32_t v15 = FindItem("Explosive bolts"); // 0x2005480e
 			int32_t v16 = v15 - (int32_t)&g61; // 0x20054816
 			int32_t v17 = *(int32_t *)(4 * (int32_t)((0x100000000 * (int64_t)(v16 >> 31) | (int64_t)v16) / 104) + v13); // 0x2005482c
 			if (v17 != 0) {
@@ -63366,7 +63374,7 @@ int32_t function_2005478b(int32_t a1) {
 		}
 		// 0x20054998
 		*(int32_t *)(v19 - 4) = *(int32_t *)(*(int32_t *)(result4 + 1300) + 60);
-		int32_t v22 = function_20014c37((int32_t)&g940); // 0x200549a5
+		int32_t v22 = FindItem((int32_t)&g940); // 0x200549a5
 		int32_t v23 = v22 - (int32_t)&g61; // 0x200549ad
 		*(int32_t *)(result4 + 2512) = (int32_t)((0x100000000 * (int64_t)(v23 >> 31) | (int64_t)v23) / 104);
 	} else {
@@ -63380,7 +63388,7 @@ int32_t function_2005478b(int32_t a1) {
 		}
 		// 0x2005493f
 		*(int32_t *)(v19 - 4) = (int32_t)"Explosive bolts";
-		int32_t v24 = function_20014c37((int32_t)&g940); // 0x20054944
+		int32_t v24 = FindItem((int32_t)&g940); // 0x20054944
 		int32_t v25 = v24 - (int32_t)&g61; // 0x2005494c
 		*(int32_t *)(result4 + 2512) = (int32_t)((0x100000000 * (int64_t)(v25 >> 31) | (int64_t)v25) / 104);
 	}
@@ -63449,12 +63457,12 @@ int32_t function_20054c1b(int32_t a1) {
 	}
 	// 0x20054c54
 	if (*(int32_t *)(result + 1296) == 0) {
-		int32_t v3 = function_20014c37((int32_t)"Flaming arrows"); // 0x20054d05
+		int32_t v3 = FindItem("Flaming arrows"); // 0x20054d05
 		int32_t v4 = v3 - (int32_t)&g61; // 0x20054d0d
 		int32_t v5 = a1 + 980; // 0x20054d23
 		int32_t v6 = *(int32_t *)(4 * (int32_t)((0x100000000 * (int64_t)(v4 >> 31) | (int64_t)v4) / 104) + v5); // 0x20054d23
 		if (v6 >= 0 != v6 != 0) {
-			int32_t v7 = function_20014c37(*(int32_t *)(*(int32_t *)(result4 + 1300) + 60)); // 0x20054d3a
+			int32_t v7 = FindItem(*(int32_t *)(*(int32_t *)(result4 + 1300) + 60)); // 0x20054d3a
 			int32_t v8 = v7 - (int32_t)&g61; // 0x20054d42
 			int32_t v9 = *(int32_t *)(4 * (int32_t)((0x100000000 * (int64_t)(v8 >> 31) | (int64_t)v8) / 104) + v5); // 0x20054d58
 			if (v9 != 0) {
@@ -63468,12 +63476,12 @@ int32_t function_20054c1b(int32_t a1) {
 		// 0x20054d8a
 		*(int32_t *)(result4 + 1296) = 1;
 	} else {
-		int32_t v11 = function_20014c37(*(int32_t *)(*(int32_t *)(result + 1300) + 60)); // 0x20054c71
+		int32_t v11 = FindItem(*(int32_t *)(*(int32_t *)(result + 1300) + 60)); // 0x20054c71
 		int32_t v12 = v11 - (int32_t)&g61; // 0x20054c79
 		int32_t v13 = a1 + 980; // 0x20054c8f
 		int32_t v14 = *(int32_t *)(4 * (int32_t)((0x100000000 * (int64_t)(v12 >> 31) | (int64_t)v12) / 104) + v13); // 0x20054c8f
 		if (v14 >= 0 != v14 != 0) {
-			int32_t v15 = function_20014c37((int32_t)"Flaming arrows"); // 0x20054c9e
+			int32_t v15 = FindItem("Flaming arrows"); // 0x20054c9e
 			int32_t v16 = v15 - (int32_t)&g61; // 0x20054ca6
 			int32_t v17 = *(int32_t *)(4 * (int32_t)((0x100000000 * (int64_t)(v16 >> 31) | (int64_t)v16) / 104) + v13); // 0x20054cbc
 			if (v17 != 0) {
@@ -63501,7 +63509,7 @@ int32_t function_20054c1b(int32_t a1) {
 		}
 		// 0x20054e28
 		*(int32_t *)(v19 - 4) = *(int32_t *)(*(int32_t *)(result4 + 1300) + 60);
-		int32_t v22 = function_20014c37((int32_t)&g940); // 0x20054e35
+		int32_t v22 = FindItem((int32_t)&g940); // 0x20054e35
 		int32_t v23 = v22 - (int32_t)&g61; // 0x20054e3d
 		*(int32_t *)(result4 + 2512) = (int32_t)((0x100000000 * (int64_t)(v23 >> 31) | (int64_t)v23) / 104);
 	} else {
@@ -63515,7 +63523,7 @@ int32_t function_20054c1b(int32_t a1) {
 		}
 		// 0x20054dcf
 		*(int32_t *)(v19 - 4) = (int32_t)"Flaming arrows";
-		int32_t v24 = function_20014c37((int32_t)&g940); // 0x20054dd4
+		int32_t v24 = FindItem((int32_t)&g940); // 0x20054dd4
 		int32_t v25 = v24 - (int32_t)&g61; // 0x20054ddc
 		*(int32_t *)(result4 + 2512) = (int32_t)((0x100000000 * (int64_t)(v25 >> 31) | (int64_t)v25) / 104);
 	}
